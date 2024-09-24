@@ -4,7 +4,7 @@
     
 @section('content')
 
-{{-- @dd(auth()->user()) --}}
+{{-- @dd(auth()->user()->toArray(), auth()->user()->hasPermission('admin')) --}}
 
 <div class="container-fluid py-4">
   <div class="row">

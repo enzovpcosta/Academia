@@ -4,22 +4,32 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\ExercicioController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TreinoController;
+use App\Models\User;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', [MenuController::class, '__invoke'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Route::get('/', [MenuController::class, '__invoke']);
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//     // Route::get('/', [MenuController::class, '__invoke']);
+// });
 
+// Route::get('/', function(){
+
+//     $user = User::where('email', 'enzo@gmail.com')->first();
+//     $user->assignPermission('admin');
+//     auth()->login($user);
+
+//     return view('site.dashboard');
+// });
+Route::get('/login', [LoginController::class, 'create']);
+Route::post('/login', [LoginController::class, 'store']);
 
 Route::get('/', [MenuController::class, '__invoke']);
 

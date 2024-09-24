@@ -18,7 +18,7 @@
             <a class="btn btn-link m-0" href="/alunos">Ver todos os alunos</a>
           </div>
           <div class="text-end">
-            <a class="btn btn-dark m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">

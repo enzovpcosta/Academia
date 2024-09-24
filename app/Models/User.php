@@ -65,4 +65,28 @@ class User extends Authenticatable
     public function horarios(){
         return $this->hasMany(Horario::class);
     }
+
+    public function permissions(){
+        return $this->belongsToMany(Permission::class);
+    }
+
+    public function hasPermission($permission){
+        return $this->permissions()->where('name', $permission)->exists();
+    }
+
+    public function assignPermission($permission){
+        $permission = $this->permissions()->where('name', $permission)->firstOrCreate([
+            'name' => $permission,
+        ]);
+
+        $this->permissions()->attach($permission);
+    }
+
+    public function removePermission($permission){
+        $permission = $this->permissions()->where('name', $permission)->first();
+
+        if($permission){
+            $this->permissions()->detach($permission);
+        }
+    }
 }

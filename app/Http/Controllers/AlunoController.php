@@ -98,6 +98,8 @@ class AlunoController extends Controller
 
         $aluno->save();
 
+        $aluno->assignPermission('aluno');
+
         $assinatura = new Assinatura;
 
         $assinatura->plano = $request->plano;
