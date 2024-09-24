@@ -1,0 +1,16 @@
+#img-header{
+    background-image: url("../img/ironberg.jpg");
+    background-position: center;
+    background-size: cover;
+    filter: brightness(30%) blur(1px);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.senha:focus{
+  outline: 0;
+}
