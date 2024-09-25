@@ -7,11 +7,16 @@ use App\Models\Horario;
 use App\Models\Treino;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class ProfessorController extends Controller
 {
     public function index(){
+
+        if(auth()->user()->hasPermission('aluno') || auth()->user()->hasPermission('professor')){
+            return to_route('dashboard');
+        }
 
         $search = request('search');
 
@@ -32,6 +37,10 @@ class ProfessorController extends Controller
 
     public function create(){
 
+        if(auth()->user()->hasPermission('aluno') || auth()->user()->hasPermission('professor')){
+            return to_route('dashboard');
+        }
+
         return view('site.professores.cadastro-professor');
 
     }
@@ -46,7 +55,7 @@ class ProfessorController extends Controller
         $professor->nascimento = $request->nascimento;
         $professor->contato = $request->telefone;
         $professor->email = $request->email;
-        $professor->password = Hash::make('password');
+        $professor->password = $request->senha;
 
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $requestImage = $request->image;
@@ -144,9 +153,21 @@ class ProfessorController extends Controller
     }
 
     public function edit($id){
+
+        if(auth()->user()->hasPermission('aluno')){
+            return to_route('dashboard');
+        }
+
         $professor = User::findOrFail($id);
 
-        return view('site.professores.editar-professor', ['professor' => $professor->load('especialidades', 'horarios')]);
+        if(auth()->user()->hasPermission('professor')){
+            if(auth()->user()->id == $professor->id){
+                return view('site.professores.editar-professor', ['professor' => $professor->load('especialidades', 'horarios')]);
+            } else {
+                return redirect()->route('dashboard');
+            }
+        }
+
     }
     
     public function update(Request $request){
@@ -372,7 +393,7 @@ class ProfessorController extends Controller
             'nascimento' => $request->nascimento,
             'contato' => $request->contato,
             'email' => $request->email,
-            'senha' => $request->senha
+            'password' => $request->senha
         ]);
 
         Especialidade::where('user_id', $request->id)->update([

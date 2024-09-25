@@ -6,12 +6,18 @@ use App\Models\Assinatura;
 use App\Models\Treino;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class AlunoController extends Controller
 {
     public function index(){
 
+        if(auth()->user()->hasPermission('aluno')){
+            return to_route('dashboard');
+        }
+        
         $search = request('search');
 
         if($search){
@@ -44,6 +50,10 @@ class AlunoController extends Controller
     }
 
     public function create(){
+
+        if(auth()->user()->hasPermission('aluno')){
+            return to_route('dashboard');
+        }
 
         return view('site.alunos.cadastro-aluno');
 
@@ -84,7 +94,7 @@ class AlunoController extends Controller
         $aluno->nascimento = $request->nascimento;
         $aluno->contato = $request->telefone;
         $aluno->email = $request->email;
-        $aluno->password = Hash::make('password');
+        $aluno->password = $request->senha;
 
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $requestImage = $request->image;
@@ -132,44 +142,77 @@ class AlunoController extends Controller
     public function edit($id){
         $aluno = User::findOrFail($id);
 
+        if(auth()->user()->hasPermission('aluno')){
+            if(auth()->user()->id == $aluno->id){
+                return view('site.alunos.editar-aluno', ['aluno' => $aluno->load('assinatura')]);
+            } else {
+                return redirect()->route('dashboard');
+            }
+        }
+
         return view('site.alunos.editar-aluno', ['aluno' => $aluno->load('assinatura')]);
+
     }
     
     public function update(Request $request){
+
+        $aluno = User::findOrFail($request->id);
+
+        $image_path = public_path('assets/img/alunos/'.$aluno->image);
+
+        if(file_exists($image_path)) {
+            unlink($image_path);
+        }
+
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request->image->move(public_path('assets/img/alunos'), $imageName);
+
+        }
         
-        User::findOrFail($request->id)->update([
+        $aluno->update([
             'nome' => $request->name,
             'cpf' => preg_replace('/[^A-Za-z0-9]/', '', $request->cpf),
             'nascimento' => $request->nascimento,
             'contato' => $request->contato,
             'email' => $request->email,
-            'senha' => $request->senha
+            'password' => $request->senha,
+            'image' => $imageName
         ]);
 
-        if($request->plano == 'Mensal'){
+        if(auth()->user()->hasPermission('admin') || auth()->user()->hasPermission('professor')){
+            
+            if($request->plano == 'Mensal'){
+    
+                $vencimento = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
+    
+            } elseif ($request->plano == 'Trimestral'){
+    
+                $vencimento = date('Y-m-d', strtotime('+3 months', strtotime(date('Y-m-d'))));
+    
+            } elseif ($request->plano == 'Semestral'){
+    
+                $vencimento = date('Y-m-d', strtotime('+6 months', strtotime(date('Y-m-d'))));
+    
+            } else {
+                $vencimento = date('Y-m-d', strtotime('+1 year', strtotime(date('Y-m-d'))));
+            }
+            
+            Assinatura::where('user_id', $request->id)->update([
+                'plano' => $request->plano,
+                'ativo' => true,
+                'obtencao' => date('Y-m-d'),
+                'vencimento' => $vencimento
+            ]);
 
-            $vencimento = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
-
-        } elseif ($request->plano == 'Trimestral'){
-
-            $vencimento = date('Y-m-d', strtotime('+3 months', strtotime(date('Y-m-d'))));
-
-        } elseif ($request->plano == 'Semestral'){
-
-            $vencimento = date('Y-m-d', strtotime('+6 months', strtotime(date('Y-m-d'))));
-
-        } else {
-            $vencimento = date('Y-m-d', strtotime('+1 year', strtotime(date('Y-m-d'))));
+            return redirect('/alunos')->with('msg', 'Aluno editado com sucesso');
         }
+
+         return redirect('/alunos/perfil/'.$request->id)->with('msg', 'Editado com sucesso'); 
         
-        Assinatura::where('user_id', $request->id)->update([
-            'plano' => $request->plano,
-            'ativo' => true,
-            'obtencao' => date('Y-m-d'),
-            'vencimento' => $vencimento
-        ]);
-        
-        return redirect('/alunos')->with('msg', 'Aluno editado com sucesso');
     }
 
     public function destroy($id){

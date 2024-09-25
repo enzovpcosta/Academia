@@ -6,14 +6,16 @@
 
 {{-- @dd($aluno) --}}
 
-<form class="container-fluid py-4" method="POST" action="/alunos/update/{{$aluno->id}}">
+<form class="container-fluid py-4" method="POST" action="/alunos/update/{{$aluno->id}}" enctype="multipart/form-data">
   @csrf
   @method('PUT')
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header pb-0">
+            @canany('admin', 'professor')
             <p class="mb-3 fw-bold">Editando: {{$aluno->nome}}</p>
+            @endcanany
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0">Dados Pessoais</p>
               <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
@@ -60,6 +62,7 @@
                   </div>
                 </div>
               </div>
+              @can('admin')
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="plano" class="form-control-label">Selecione o plano:</label>
@@ -73,10 +76,60 @@
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="plano" class="form-control-label opacity-0">|</label>
-                  <button type="submit" class="btn btn-dark btn-sm w-100 m-0">Editar</button>
+                  <label for="image" class="form-control-label">Foto do aluno</label>
+                  <input class="form-control" type="file" name="image" required>
+                  @error('image')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
+                </div>
+              </div>
+              @elsecan('professor')
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="plano" class="form-control-label">Selecione o plano:</label>
+                  <select name="plano" id="plano" class="form-control">
+                    <option value="Mensal">Mensal</option>
+                    <option value="Trimestral">Trimestral</option> 
+                    <option value="Semestral">Semestral</option> 
+                    <option value="Anual">Anual</option>             
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="image" class="form-control-label">Foto do aluno</label>
+                  <input class="form-control" type="file" name="image" required>
+                  @error('image')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
+                </div>
+              </div>
+              @elsecan('aluno')
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="image" class="form-control-label">Foto do aluno</label>
+                  <input class="form-control" type="file" name="image" required>
+                  @error('image')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
+                </div>
+              </div>
+              @endcan
            </div>
         </div>
       </div>

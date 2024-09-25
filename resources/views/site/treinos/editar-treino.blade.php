@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button type="submit" class="btn btn-dark btn-sm w-100">Editar</button>
+                <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
               </div>
             </div>
           </div>

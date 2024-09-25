@@ -53,7 +53,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="criar" class="btn btn-dark btn-sm w-100">Criar</button>
+                <button id="criar" class="btn bg-gradient-info shadow-info btn-sm w-100">Criar</button>
               </div>
             </div>
           </div>

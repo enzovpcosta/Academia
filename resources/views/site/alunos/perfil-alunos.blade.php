@@ -6,7 +6,7 @@
 
 {{-- @dd($aluno) --}}
 
-<div class="card shadow-lg mx-4 card-profile-bottom">
+<div class="card shadow-lg mx-4 card-profile-middle">
       <div class="card-body p-3">
         <div class="row gx-4">
           <div class="col-auto">
@@ -31,7 +31,7 @@
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <h6>Informações do aluno</h6>
-                <a href="/alunos/editar/{{$aluno->id}}" class="btn btn-primary btn-sm ms-auto">Editar</a>
+                <a href="/alunos/editar/{{$aluno->id}}" class="btn bg-gradient-info shadow-info btn-sm ms-auto">Editar</a>
               </div>
             </div>
             <div class="card-body">
@@ -58,7 +58,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="example-text-input" class="form-control-label">CPF</label>
-                    <input class="form-control" type="text" value="{{$aluno->cpf}}" readonly>
+                    <input class="cpf form-control" type="text" value="{{$aluno->cpf}}" readonly>
                   </div>
                 </div>
                 <div class="col-md-6">

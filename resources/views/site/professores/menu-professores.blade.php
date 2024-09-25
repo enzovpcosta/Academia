@@ -18,7 +18,7 @@
             <a class="btn btn-link m-0" href="/professores">Ver todos os professores</a>
           </div>
           <div class="text-end">
-            <a class="btn btn-dark m-0" href="/professores/cadastrar">Cadastrar novo professor</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/professores/cadastrar">Cadastrar novo professor</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -40,7 +40,7 @@
             <a class="btn btn-link m-0" href="/professores">Ver todos os professores</a>
           </div>
           <div class="text-end">
-            <a class="btn btn-dark m-0" href="/professores/cadastrar">Cadastrar novo professor</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/professores/cadastrar">Cadastrar novo professor</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">

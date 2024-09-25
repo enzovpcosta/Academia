@@ -22,7 +22,7 @@
             <a class="btn btn-link m-0" href="/treinos">Ver todos os treinos</a>
           </div>
           <div class="text-end">
-            <a class="btn btn-dark m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -44,7 +44,7 @@
             <a class="btn btn-link m-0" href="/treinos">Ver todos os treinos</a>
           </div>
           <div class="text-end">
-            <a class="btn btn-dark m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">

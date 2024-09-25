@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="editar" class="btn btn-dark btn-sm w-100">Editar</button>
+                <button id="editar" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
               </div>
             </div>
           </div>

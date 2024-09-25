@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form class="container-fluid py-4" method="POST" action="/professores/cadastrar" enctype="multipart/form-data">
+<form class="container-fluid py-4" method="POST" action="/professores/cadastrar" enctype="multipart/form-data" id="cadastroProf">
   @csrf
     <div class="'row'">
       <div class="col-md-12">
@@ -175,7 +175,7 @@
                 <input class="form-control" type="text" name="especialidade" placeholder="Digite aqui as especialidades" required>
               </div>
               <div class="col-md-12 mt-3">
-                <button type="submit" class="btn btn-dark btn-sm w-100">Cadastrar</button>
+                <button id="btncadastro" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Cadastrar</button>
               </div>
             </div>
           </div>

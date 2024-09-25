@@ -56,6 +56,7 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
+        @canany(['admin', 'professor'])
         <li class="nav-item">
           <a class="nav-link" href="/">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -80,6 +81,7 @@
             </li>
           </ul>
         </li>
+        @can('admin')
         <li class="nav-item my-1 disabled">
           <a href="#dropdownP" class="nav-link" data-bs-toggle="collapse" aria-current="page">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -96,6 +98,7 @@
             </li>
           </ul>
         </li>
+        @endcan
         <li class="nav-item my-1 disabled">
           <a href="#dropdownT" class="nav-link" data-bs-toggle="collapse" aria-current="page">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -128,6 +131,33 @@
             </li>
           </ul>
         </li>
+        @endcanany
+        @can('aluno')
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-house text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Menu Principal</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/alunos/treinos/{{auth()->user()->id}}">
+            <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-lightning-charge text-warning text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Meus Treinos</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/alunos/perfil/{{auth()->user()->id}}">
+            <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-person text-dark text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Meu Perfil</span>
+          </a>
+        </li>
+        @endcan
       </ul>
     </div>
   </aside>
@@ -145,8 +175,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Digite aqui...">
+              <a href="/logout" class="btn bg-gradient-danger shadow-danger btn-sm w-100 m-0">Sair</a>
             </div>
           </div>
         </div>

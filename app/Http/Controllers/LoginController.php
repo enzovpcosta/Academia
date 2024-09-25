@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -24,9 +26,42 @@ class LoginController extends Controller
             'password.required' => 'Este campo é obrigatório'
         ]);
 
-        $credencials = $request->only('email', 'password');
-        // dd($credencials);
-        Auth::attempt($credencials);
+       $user = User::where('email', $request->email)->first();
+    //    dd($user);
 
+        if($user->tipo == 'admin'){
+            if($request->password == $user->password){
+                $user->assignPermission($user->tipo);
+                auth()->login($user);
+         
+                Auth::loginUsingId($user->id);
+
+                return redirect()->route('dashboard');
+            }
+        }
+
+       if(!$user){
+        return back()->withErrors(['error' => 'Email ou senha inválida!']);
+       }
+
+       if(!Hash::check($request->password, $user->password)){
+        return back()->withErrors(['error' => 'Email ou senha inválida!']);
+       }
+       if($user->hasPermission($user->tipo) == false){
+           $user->assignPermission($user->tipo);
+       }
+
+       auth()->login($user);
+
+       Auth::loginUsingId($user->id);
+
+       return redirect()->route('dashboard');
+
+    }
+
+    public function destroy(){
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }

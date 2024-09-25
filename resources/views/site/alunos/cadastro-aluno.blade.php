@@ -99,7 +99,7 @@
                 </div>
               </div>
               <div class="col-md-12 d-flex align-items-center">
-                  <button type="submit" class="btn btn-dark btn-sm w-100 m-0">Cadastrar</button>
+                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Cadastrar</button>
               </div>
            </div>
         </div>

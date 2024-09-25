@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="cadastrar" type="submit" class="btn btn-dark btn-sm w-100">Cadastrar</button>
+                <button id="cadastrar" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Cadastrar</button>
               </div>
             </div>
           </div>
