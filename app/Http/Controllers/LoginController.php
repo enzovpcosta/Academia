@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -12,7 +13,7 @@ class LoginController extends Controller
     }
 
     public function store(LoginRequest $request){
-        dd($request->all());
+        // dd($request->all());
 
         $request->validate([
             'email' => 'required|email',
@@ -22,6 +23,10 @@ class LoginController extends Controller
             'email.email' => 'Digite um email válido',
             'password.required' => 'Este campo é obrigatório'
         ]);
+
+        $credencials = $request->only('email', 'password');
+        // dd($credencials);
+        Auth::attempt($credencials);
 
     }
 }
