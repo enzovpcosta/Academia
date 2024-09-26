@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Mail\Contact;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -28,7 +30,11 @@ class LoginController extends Controller
 
        $user = User::where('email', $request->email)->first();
     //    dd($user);
-
+    
+        if(!$user){
+        return back()->withErrors(['error' => 'Email ou senha inválida!']);
+        }
+        
         if($user->tipo == 'admin'){
             if($request->password == $user->password){
                 $user->assignPermission($user->tipo);
@@ -40,9 +46,6 @@ class LoginController extends Controller
             }
         }
 
-       if(!$user){
-        return back()->withErrors(['error' => 'Email ou senha inválida!']);
-       }
 
        if(!Hash::check($request->password, $user->password)){
         return back()->withErrors(['error' => 'Email ou senha inválida!']);
@@ -57,6 +60,33 @@ class LoginController extends Controller
 
        return redirect()->route('dashboard');
 
+    }
+
+    public function resetPassword(){
+        return view('auth.forgot-password');
+    }
+
+    public function newPassword(Request $request){
+        // dd($request->all());
+        $user = User::where('email', $request->email)->first();
+        
+        if(!$user){
+            return back()->withErrors(['error' => 'Email inválido!']);
+        }
+        
+        $newPassword = substr(md5(time()), 0, 6);
+        $user->update([
+            'password' => $newPassword
+        ]);
+        
+        Mail::to('costa@gmail.com', 'Costa')->send(new Contact([
+            'fromName' => 'Academia',
+            'fromEmail' => 'academia@academia',
+            'subject' => 'Nova senha',
+            'message' => 'Sua nova senha é: '.$newPassword
+        ]));
+
+        return to_route('login');
     }
 
     public function destroy(){

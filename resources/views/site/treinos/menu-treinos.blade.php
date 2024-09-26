@@ -10,44 +10,25 @@
   @dd($treino->professor, $treino->user)  
 @endforeach --}}
 
-@if (count($treinos) == 0)
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
           <h6>Treinos</h6>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/treinos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o nome do aluno"></form>
-            <a class="btn btn-link m-0" href="/treinos">Ver todos os treinos</a>
+          <div class="col-4">
+            <form action="/treinos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o CPF do aluno"></form>
           </div>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-@else
-<div class="container-fluid py-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          <h6>Treinos</h6>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/treinos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o nome do aluno"></form>
-            <a class="btn btn-link m-0" href="/treinos">Ver todos os treinos</a>
-          </div>
-          <div class="text-end">
-            <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
-          </div>
-        </div>
-        <div class="card-body px-0 pt-0 pb-2">
+          @if ($treinos == 'menu')
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Digite o CPF do aluno no campo de pesquisa para ver seus treinos!</p>
+          @elseif($treinos != 'menu' && count($treinos) == 0)
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado para o cpf: {{$search}}</p>
+          @else
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
@@ -56,7 +37,7 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aluno</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">professor</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Professor</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
                 </tr>
               </thead>

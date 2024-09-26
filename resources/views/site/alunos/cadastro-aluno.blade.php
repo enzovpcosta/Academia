@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form class="container-fluid py-4" method="POST" action="/alunos/cadastrar" enctype="multipart/form-data">
+<form class="container-fluid py-4" method="POST" action="/alunos/cadastrar" enctype="multipart/form-data" id="cadastroAluno">
   @csrf
     <div class="row">
       <div class="col-md-12">
@@ -99,7 +99,7 @@
                 </div>
               </div>
               <div class="col-md-12 d-flex align-items-center">
-                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Cadastrar</button>
+                  <button id="btnCadastroAluno" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Cadastrar</button>
               </div>
            </div>
         </div>
@@ -110,6 +110,11 @@
     $('#plano').select2({
       placeholder: 'Escolha algum plano',
       theme: 'bootstrap-5'
+    });
+
+    $(document).on('submit', '#cadastroAluno', function () {
+      var btn = document.getElementById('btnCadastroAluno')
+      btn.disabled = true
     });
   </script>
 

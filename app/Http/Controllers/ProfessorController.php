@@ -409,6 +409,7 @@ class ProfessorController extends Controller
         // Especialidade::where('user_id', $id)->delete();
         $professor = User::findOrFail($id);
         $image_path = public_path('assets/img/professores/'.$professor->image);
+        $professor->removePermission('professor');
 
         if(file_exists($image_path)) {
             unlink($image_path);

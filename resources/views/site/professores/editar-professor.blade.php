@@ -6,7 +6,7 @@
 
 {{-- @dd($professor) --}}
 
-<form class="container-fluid py-4" method="POST" action="/professores/update/{{$professor->id}}">
+<form class="container-fluid py-4" method="POST" action="/professores/update/{{$professor->id}}" id="editProf">
   @csrf
   @method('PUT')
     <div class="row">
@@ -232,12 +232,18 @@
                 <input class="form-control" type="text" name="especialidade" placeholder="Digite aqui as especialidades" value="{{$professor->especialidades->nome}}" required>
               </div>
               <div class="col-md-12 mt-3">
-                <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
+                <button id="btnEditProf" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
               </div>
            </div>
         </div>
       </div>
     </div>
   </form>
+  <script>
+    $(document).on('submit', '#editProf', function () {
+      var btn = document.getElementById('btnEditProf')
+      btn.disabled = true
+    });
+  </script>
 
 @endsection

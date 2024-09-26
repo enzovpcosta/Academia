@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="editar" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
+                <button id="editar" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
               </div>
             </div>
           </div>
@@ -67,11 +67,16 @@
   </script>
 @endif
 <script>
-$(document).ready(function () {
-        $('.musculos').select2({
-          placeholder: 'Escolha o musculo',
-          theme: 'bootstrap-5'
-        })
-      });
+  $(document).ready(function () {
+    $('.musculos').select2({
+        placeholder: 'Escolha o musculo',
+        theme: 'bootstrap-5'
+    })
+  });
+
+    $(document).on('submit', '#editarExercicio', function () {
+        var btn = document.getElementById('editar')
+        btn.disabled = true
+    });     
 </script>
 @endsection

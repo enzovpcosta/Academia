@@ -9,16 +9,28 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TreinoController;
+use App\Models\Assinatura;
 use App\Models\User;
 use FontLib\Table\Type\name;
 
-Route::get('/login', [LoginController::class, 'create'])->name('login');
-Route::post('/login', [LoginController::class, 'store']);
-Route::get('/logout', [LoginController::class, 'destroy'])->middleware('auth');
+// Route::get('/', function() {
+//     User::factory()->create();
+//     Assinatura::factory()->create();
+// });
+
+Route::middleware('guest')->group(function () {
+    
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+    Route::get('/reset-password', [LoginController::class, 'resetPassword']);
+    Route::post('/reset-password', [LoginController::class, 'newPassword']);
+});
+
 
 Route::middleware('auth')->group(function () {
     
     Route::get('/', [MenuController::class, '__invoke'])->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
 
     //ROTAS ALUNOS
     

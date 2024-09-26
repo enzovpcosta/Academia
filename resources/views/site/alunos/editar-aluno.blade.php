@@ -6,7 +6,7 @@
 
 {{-- @dd($aluno) --}}
 
-<form class="container-fluid py-4" method="POST" action="/alunos/update/{{$aluno->id}}" enctype="multipart/form-data">
+<form class="container-fluid py-4" method="POST" action="/alunos/update/{{$aluno->id}}" enctype="multipart/form-data" id="editAluno">
   @csrf
   @method('PUT')
     <div class="row">
@@ -62,7 +62,7 @@
                   </div>
                 </div>
               </div>
-              @can('admin')
+              @canany('admin', 'professor')
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="plano" class="form-control-label">Selecione o plano:</label>
@@ -85,33 +85,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
-                </div>
-              </div>
-              @elsecan('professor')
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="plano" class="form-control-label">Selecione o plano:</label>
-                  <select name="plano" id="plano" class="form-control">
-                    <option value="Mensal">Mensal</option>
-                    <option value="Trimestral">Trimestral</option> 
-                    <option value="Semestral">Semestral</option> 
-                    <option value="Anual">Anual</option>             
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="image" class="form-control-label">Foto do aluno</label>
-                  <input class="form-control" type="file" name="image" required>
-                  @error('image')
-                        <span class="text-danger">{{$message}}</span>
-                    @enderror
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group">
-                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
+                  <button id="btnEditAluno" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
                 </div>
               </div>
               @elsecan('aluno')
@@ -126,7 +100,7 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
+                  <button id="btnEditAluno" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100 m-0">Editar</button>
                 </div>
               </div>
               @endcan
@@ -135,5 +109,12 @@
       </div>
     </div>
   </form>
+
+  <script>
+    $(document).on('submit', '#editAluno', function () {
+      var btn = document.getElementById('btnEditAluno')
+      btn.disabled = true
+    });
+  </script>
 
 @endsection

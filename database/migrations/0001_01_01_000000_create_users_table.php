@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->enum('tipo', ['admin', 'aluno', 'professor']);
-            $table->string('cpf');
+            $table->string('cpf')->unique();
             $table->date('nascimento');
             $table->string('contato');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
         });

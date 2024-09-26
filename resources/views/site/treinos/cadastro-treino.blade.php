@@ -95,12 +95,16 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="form-control-label">Nome do professor</label>
+                  @can('admin')
                   <select class="professor form-select" id="professor" name="professor" required>
                     <option value=""></option>
                     @foreach ($professores as $professor)
                         <option value="{{$professor->id}}">{{$professor->nome}}</option>
                     @endforeach
                   </select>
+                  @elsecan('professor')
+                  <input type="text" class="form-control" id="professor" name="professor" value="{{auth()->user()->id}}" readonly>
+                  @endcan
                 </div>
               </div>
               <div class="col-md-6">
@@ -110,7 +114,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="cadastrar" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Cadastrar</button>
+                <button id="btnCadastrarTreino" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Cadastrar</button>
               </div>
             </div>
           </div>
@@ -119,6 +123,11 @@
     </div>
   </form>
   <script>
+
+    $(document).on('submit', '#cadastroTreino', function () {
+      var btn = document.getElementById('btnCadastrarTreino')
+      btn.disabled = true
+    });
 
     id_row = 2;
 
@@ -290,42 +299,6 @@
           theme: 'bootstrap-5'
         })
       });
-
-    // $('#cadastrar').click(function (e) { 
-    //     e.preventDefault();
-    //     var aluno = $('#aluno').val();
-    //     var professor = $('#professor').val();
-    //     var nome = $('#name').val();
-        
-
-    //     if(nome != ""){
-    //       if(aluno == 0){
-    //           Swal.fire({
-    //               icon: "error",
-    //               title: "Erro!",
-    //               text: "Selecione algum aluno!"
-    //           });
-    //       } else if(professor == 0){
-    //         Swal.fire({
-    //               icon: "error",
-    //               title: "Erro!",
-    //               text: "Selecione algum professor!"
-    //           });
-    //       } else {
-    //           var form = document.getElementById("cadastroTreino")
-    //           form.submit()
-    //       }
-    //     } else {
-    //       Swal.fire({
-    //               icon: "error",
-    //               title: "Erro!",
-    //               text: "Preencha todos os campos!"
-    //           });
-    //     }
-
-          
-
-    // });
 
   </script>
  

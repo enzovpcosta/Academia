@@ -24,12 +24,12 @@ class AlunoController extends Controller
 
             $alunos = User::where([
                 'tipo' => 'aluno',
-                ['nome', 'like', '%'.$search.'%']
-            ])->with('assinatura')->paginate(8);
+                ['cpf', 'like', '%'.$search.'%']
+            ])->with('assinatura')->paginate(10);
 
         } else {
 
-            $alunos = User::where('tipo', 'aluno')->with('assinatura')->paginate(8);
+            $alunos = User::where('tipo', 'aluno')->with('assinatura')->paginate(10);
         // dd($alunos);
             $assinaturas = Assinatura::all();
             foreach ($assinaturas as $assinatura){
@@ -220,6 +220,7 @@ class AlunoController extends Controller
         // Assinatura::where('user_id', $id)->delete();
         $aluno = User::findOrFail($id);
         $image_path = public_path('assets/img/alunos/'.$aluno->image);
+        $aluno->removePermission('aluno');
 
         if(file_exists($image_path)) {
             unlink($image_path);

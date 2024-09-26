@@ -183,5 +183,12 @@
       </div>
     </div>
   </form>
+
+  <script>
+    $(document).on('submit', '#cadastroProf', function () {
+      var btn = document.getElementById('btncadastro')
+      btn.disabled = true
+    });
+  </script>
  
 @endsection

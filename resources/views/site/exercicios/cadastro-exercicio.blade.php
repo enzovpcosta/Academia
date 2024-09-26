@@ -53,7 +53,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button id="criar" class="btn bg-gradient-info shadow-info btn-sm w-100">Criar</button>
+                <button id="criar" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Criar</button>
               </div>
             </div>
           </div>
@@ -74,5 +74,10 @@
       placeholder: 'Selecione o músculo alvo',
       theme: 'bootstrap-5'
     })
+
+    $(document).on('submit', '#cadastroExercicio', function () {
+      var btn = document.getElementById('criar')
+      btn.disabled = true
+    });
  </script>
 @endsection

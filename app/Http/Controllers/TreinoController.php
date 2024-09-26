@@ -21,11 +21,15 @@ class TreinoController extends Controller
             ['cpf', 'like', '%'.$search.'%']
         ])->first();
       //   dd($aluno);
-        $treinos = Treino::where('user_id',$aluno->id)->get();
+            if($aluno){
+               $treinos = Treino::where('user_id',$aluno->id)->get();
+            } else {
+               $treinos = [];
+            }
       //   dd($treinos);
      } else {
 
-     $treinos = Treino::all();
+     $treinos = 'menu';
      
  }
       return view('site.treinos.menu-treinos', ['treinos' => $treinos, 'search' => $search]);

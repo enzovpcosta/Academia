@@ -6,7 +6,7 @@
 
 {{-- @dd(auth()->user()->toArray(), auth()->user()->hasPermission('professor')) --}}
 {{-- @dd(auth()->user()->hasPermission('aluno')) --}}
-
+{{-- @dd(auth()) --}}
 <div class="container-fluid py-4">
   <div class="row">
     @if (auth()->check())

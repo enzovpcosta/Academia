@@ -6,7 +6,7 @@
 
 {{-- @dd($treino, $exerciciosAluno, $exerciciosTodos, $musculos) --}}
 
-<form class="container-fluid py-4" method="POST" action="/treinos/update/{{$treino->id}}">
+<form class="container-fluid py-4" method="POST" action="/treinos/update/{{$treino->id}}" id="editTreino">
   @csrf
   @method('PUT')
     <div class="'row'">
@@ -115,7 +115,7 @@
                 </div>
               </div>
               <div class="col-md-12 mt-3">
-                <button type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
+                <button id="btnEditTreino" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>
               </div>
             </div>
           </div>
@@ -124,6 +124,11 @@
     </div>
   </form>
   <script>
+
+    $(document).on('submit', '#editTreino', function () {
+      var btn = document.getElementById('btnEditTreino')
+      btn.disabled = true
+    });
 
     id_row = 2;
 
