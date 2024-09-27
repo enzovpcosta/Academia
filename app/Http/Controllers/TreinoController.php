@@ -183,4 +183,8 @@ public function destroy($id){
    return back()->with('msg', 'Treino excluído com sucesso');
 }
 
+public function storeHistorico(Request $request){
+   dd($request->all());
+}
+
 }

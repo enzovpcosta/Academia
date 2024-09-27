@@ -21,6 +21,7 @@
           </div>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">

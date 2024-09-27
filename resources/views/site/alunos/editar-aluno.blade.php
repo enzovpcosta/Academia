@@ -57,9 +57,12 @@
                 <div class="form-group">
                   <label for="senha" class="form-control-label">Senha</label>
                   <div class="form-control d-flex">
-                    <input class="senha w-100 border-0" type="password" id="senha" name="senha" value="{{$aluno->senha}}" required>
+                    <input class="senha w-100 border-0" type="password" id="senha" name="senha" value="{{old('senha')}}">
                     <i class="bi bi-eye-fill" onclick="senha(this)"></i>
                   </div>
+                  @error('senha')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
               </div>
               @canany('admin', 'professor')
@@ -77,7 +80,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="image" class="form-control-label">Foto do aluno</label>
-                  <input class="form-control" type="file" name="image" required>
+                  <input class="form-control" type="file" name="image">
                   @error('image')
                         <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -92,7 +95,7 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="image" class="form-control-label">Foto do aluno</label>
-                  <input class="form-control" type="file" name="image" required>
+                  <input class="form-control" type="file" name="image">
                   @error('image')
                         <span class="text-danger">{{$message}}</span>
                     @enderror
@@ -111,6 +114,11 @@
   </form>
 
   <script>
+    $('#plano').select2({
+      placeholder: 'Escolha algum plano',
+      theme: 'bootstrap-5'
+    });
+
     $(document).on('submit', '#editAluno', function () {
       var btn = document.getElementById('btnEditAluno')
       btn.disabled = true

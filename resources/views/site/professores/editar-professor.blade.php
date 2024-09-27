@@ -6,17 +6,23 @@
 
 {{-- @dd($professor) --}}
 
-<form class="container-fluid py-4" method="POST" action="/professores/update/{{$professor->id}}" id="editProf">
+<form class="container-fluid py-4" method="POST" action="/professores/update/{{$professor->id}}" id="editProf" enctype="multipart/form-data">
   @csrf
   @method('PUT')
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header pb-0">
+            @can('admin')
             <p class="mb-3 fw-bold">Editando: {{$professor->nome}}</p>
+            @endcan
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0">Dados Pessoais</p>
-              <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+              @can('admin')
+                <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+              @elsecan('professor')
+              <a class="btn btn-outline-dark btn-sm m-0" href="/professores/perfil/{{auth()->user()->id}}"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+              @endcan
             </div>
           </div>
           <div class="card-body">
@@ -24,40 +30,67 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="name" class="form-control-label">Nome completo</label>
-                  <input class="form-control" type="text" name="name" value="{{$professor->nome}}" required>
+                  <input class="form-control" type="text" name="name" value="{{$professor->nome}}">
+                  @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="cpf" class="form-control-label">CPF</label>
-                  <input class="cpf form-control" type="text" name="cpf" value="{{$professor->cpf}}" required>
+                  <input class="cpf form-control" type="text" name="cpf" value="{{$professor->cpf}}">
+                  @error('cpf')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="contato" class="form-control-label">Telefone</label>
-                  <input class="telefone form-control" type="text" name="contato" value="{{$professor->contato}}" required>
+                  <input class="telefone form-control" type="text" name="telefone" value="{{$professor->contato}}">
+                  @error('telefone')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="nascimento" class="form-control-label">Data de nascimento</label>
-                  <input class="form-control" type="date" max="{{date('Y-m-d')}}" name="nascimento" value="{{$professor->nascimento}}" required>
+                  <input class="form-control" type="date" max="{{date('Y-m-d')}}" name="nascimento" value="{{$professor->nascimento}}">
+                  @error('nascimento')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="email" class="form-control-label">Email</label>
-                  <input class="form-control" type="email" name="email" value="{{$professor->email}}" required>
+                  <input class="form-control" type="email" name="email" value="{{$professor->email}}">
+                  @error('email')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="senha" class="form-control-label">Senha</label>
                   <div class="form-control d-flex">
-                    <input class="senha w-100 border-0" type="password" id="senha" name="senha" value="{{$professor->senha}}" required>
+                    <input class="senha w-100 border-0" type="password" id="senha" name="senha" value="{{old('senha')}}">
                     <i class="bi bi-eye-fill" onclick="senha(this)"></i>
                   </div>
+                  @error('senha')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="image" class="form-control-label">Foto do professor</label>
+                  <input class="form-control" type="file" name="image">
+                  @error('image')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
               </div>
               <hr class="horizontal dark my-3">
@@ -229,7 +262,10 @@
                 <p class="text-uppercase text-sm m-0">Especialidades</p>
               </div>
               <div class="col-md-12">
-                <input class="form-control" type="text" name="especialidade" placeholder="Digite aqui as especialidades" value="{{$professor->especialidades->nome}}" required>
+                <input class="form-control" type="text" name="especialidade" placeholder="Digite aqui as especialidades" value="{{$professor->especialidades->nome}}">
+                @error('especialidade')
+                        <span class="text-danger">{{$message}}</span>
+                    @enderror
               </div>
               <div class="col-md-12 mt-3">
                 <button id="btnEditProf" type="submit" class="btn bg-gradient-info shadow-info btn-sm w-100">Editar</button>

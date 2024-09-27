@@ -47,6 +47,31 @@ class ProfessorController extends Controller
 
     public function store(Request $request){
 
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required|size:14',
+            'nascimento' => 'required|date',
+            'telefone' => 'required|size:15',
+            'email' => 'required|email',
+            'senha' => 'required|min:4',
+            'especialidade' => 'required',
+            'image' => 'required'
+        ], [
+            'name.required' => 'Este campo é obrigatório',
+            'cpf.required' => 'Este campo é obrigatório',
+            'cpf.size' => 'Digite um CPF válido',
+            'nascimento.required' => 'Este campo é obrigatório',
+            'nascimento.date' => 'Escolha uma data válida',
+            'telefone.required' => 'Este campo é obrigatório',
+            'telefone.size' => 'Digite um telefone válido',
+            'email.required' => 'Este campo é obrigatório',
+            'email.email' => 'Digite um email válido',
+            'senha.required' => 'Este campo é obrigatório',
+            'senha.min' => 'A senha deve ter no mínimo :min caracteres',
+            'especialidade.required' => 'Este campo é obrigatório',
+            'image.required' => 'Este campo é obrigatório',
+        ]);
+
         $professor = new User;
 
         $professor->nome = $request->name;
@@ -168,9 +193,36 @@ class ProfessorController extends Controller
             }
         }
 
+        return view('site.professores.editar-professor', ['professor' => $professor->load('especialidades', 'horarios')]);
+
     }
     
     public function update(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required|size:14',
+            'nascimento' => 'required|date',
+            'telefone' => 'required|size:15',
+            'email' => 'required|email',
+            'senha' => 'required|min:4',
+            'especialidade' => 'required',
+            'image' => 'required'
+        ], [
+            'name.required' => 'Este campo é obrigatório',
+            'cpf.required' => 'Este campo é obrigatório',
+            'cpf.size' => 'Digite um CPF válido',
+            'nascimento.required' => 'Este campo é obrigatório',
+            'nascimento.date' => 'Escolha uma data válida',
+            'telefone.required' => 'Este campo é obrigatório',
+            'telefone.size' => 'Digite um telefone válido',
+            'email.required' => 'Este campo é obrigatório',
+            'email.email' => 'Digite um email válido',
+            'senha.required' => 'Este campo é obrigatório',
+            'senha.min' => 'A senha deve ter no mínimo :min caracteres',
+            'especialidade.required' => 'Este campo é obrigatório',
+            'image.required' => 'Este campo é obrigatório',
+        ]);
 
         if(isset($request->segundaInicio) && isset($request->segundaFim)){
 
@@ -386,14 +438,31 @@ class ProfessorController extends Controller
                 'user_id' => $request->id
             ])->delete();
         }
+
+        $professor = User::findOrFail($request->id);
+
+        $image_path = public_path('assets/img/professores/'.$professor->image);
+
+        if(file_exists($image_path)) {
+            unlink($image_path);
+        }
+
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $requestImage = $request->image;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $request->image->move(public_path('assets/img/professores'), $imageName);
+        }
         
-        User::findOrFail($request->id)->update([
+       $professor->update([
             'nome' => $request->name,
             'cpf' => $request->cpf,
             'nascimento' => $request->nascimento,
-            'contato' => $request->contato,
+            'contato' => $request->telefone,
             'email' => $request->email,
-            'password' => $request->senha
+            'password' => $request->senha,
+            'image' => $imageName
         ]);
 
         Especialidade::where('user_id', $request->id)->update([

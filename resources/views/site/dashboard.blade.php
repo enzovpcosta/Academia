@@ -14,7 +14,7 @@
     @endif
     @can('admin')
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/alunos" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/professores" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -56,7 +56,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/treinos" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -77,7 +77,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/exercicios" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -99,7 +99,7 @@
     </div>    
     @elsecan('professor')
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/alunos" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -112,7 +112,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-dark shadow-primary text-center rounded-circle">
-                <i class="bi bi-person-fill text-lg opacity-10" aria-hidden="true"></i>
+                <i class="bi bi-person-fill opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/treinos" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -133,7 +133,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                <i class="bi bi-lightning-charge-fill text-lg text-sm opacity-10"></i>
+                <i class="bi bi-lightning-charge-fill opacity-10"></i>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/exercicios" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -160,11 +160,29 @@
           </div>
         </a>
       </div>
-    </div>    
+    </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card h-100">
+        <a href="/professores/perfil/{{auth()->user()->id}}" class="card-body p-3">
+          <div class="row">
+            <div class="col-8 d-flex align-items-center">
+                <h5 class="font-weight-bolder">
+                  Meu Perfil
+                </h5>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-light shadow-primary text-center rounded-circle">
+                <i class="bi bi-person-fill text-dark opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>      
     @elsecan('aluno')
     {{-- @dd($plano) --}}
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <a href="/alunos/treinos/{{auth()->user()->id}}" class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -185,7 +203,7 @@
       </div>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
+      <div class="card h-100">
         <div class="card-body p-3">
           <div class="row">
             <div class="col-8">
@@ -203,6 +221,24 @@
         </div>
       </div>
     </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card h-100">
+        <a href="/alunos/perfil/{{auth()->user()->id}}" class="card-body p-3">
+          <div class="row">
+            <div class="col-8 d-flex align-items-center">
+                <h5 class="font-weight-bolder">
+                  Meu Perfil
+                </h5>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-light shadow-primary text-center rounded-circle">
+                <i class="bi bi-person-fill text-dark opacity-10" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>  
     @endcan
     
   </div>

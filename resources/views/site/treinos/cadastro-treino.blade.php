@@ -12,8 +12,9 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header pb-0">
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0">Informações</p>
+              <a class="btn btn-outline-dark btn-sm m-0" href="/treinos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
             </div>
           </div>
           <div class="card-body">

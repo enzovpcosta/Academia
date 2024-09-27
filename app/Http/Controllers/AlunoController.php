@@ -156,6 +156,31 @@ class AlunoController extends Controller
     
     public function update(Request $request){
 
+        $request->validate([
+            'name' => 'required',
+            'cpf' => 'required|size:14',
+            'nascimento' => 'required|date',
+            'telefone' => 'required|size:15',
+            'email' => 'required|email',
+            'senha' => 'required|min:4',
+            'plano' => 'required',
+            'image' => 'required'
+        ], [
+            'name.required' => 'Este campo é obrigatório',
+            'cpf.required' => 'Este campo é obrigatório',
+            'cpf.size' => 'Digite um CPF válido',
+            'nascimento.required' => 'Este campo é obrigatório',
+            'nascimento.date' => 'Escolha uma data válida',
+            'telefone.required' => 'Este campo é obrigatório',
+            'telefone.size' => 'Digite um telefone válido',
+            'email.required' => 'Este campo é obrigatório',
+            'email.email' => 'Digite um email válido',
+            'senha.required' => 'Este campo é obrigatório',
+            'senha.min' => 'A senha deve ter no mínimo :min caracteres',
+            'plano.required' => 'Este campo é obrigatório',
+            'image.required' => 'Este campo é obrigatório',
+        ]);
+
         $aluno = User::findOrFail($request->id);
 
         $image_path = public_path('assets/img/alunos/'.$aluno->image);
@@ -228,7 +253,7 @@ class AlunoController extends Controller
 
         $aluno->delete();
 
-        return redirect('/alunos')->with('msg', 'Aluno excluído com sucesso');
+        return back()->with('msg', 'Aluno excluído com sucesso');
     }
 
     public function showPerfil($id){

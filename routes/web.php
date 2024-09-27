@@ -74,4 +74,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/treinos/update/{id}', [TreinoController::class, 'update']);
     Route::delete('/treinos/deletar/{id}', [TreinoController::class, 'destroy']);
     Route::get('/treinos/download/{id}', [PdfController::class, 'pdf']);
+
+    Route::post('/historico/{id}', [TreinoController::class, 'storeHistorico']);
 });

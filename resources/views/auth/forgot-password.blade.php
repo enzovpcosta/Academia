@@ -1,7 +1,7 @@
 <x-guest-layout>
 
     <x-primary-button-voltar>
-        {{ __('Voltar') }}
+        <i class="bi bi-arrow-left me-3 fw-bold"></i>  {{ __('Voltar') }}
     </x-primary-button-voltar>
 
     <div class="mb-4 mt-4 text-sm text-gray-600 dark:text-gray-400">
