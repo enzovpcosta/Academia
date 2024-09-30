@@ -26,6 +26,10 @@ class Treino extends Model
         return $this->hasOne(User::class, 'id', 'professor_id');
     }
 
+    public function historicos(){
+        return $this->belongsToMany(Historico::class);
+    }
+
     public function treinoExercicio(){
         return $this->belongsToMany(TreinoExercicio::class);
     }

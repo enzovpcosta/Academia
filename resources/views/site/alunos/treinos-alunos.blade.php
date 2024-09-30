@@ -107,11 +107,11 @@
                           </div>
                           <div class="modal-body">
                             <div class="form-group">
-                              <form action="/historico/{{$treino->id}}" method="POST">
+                              <form action="/alunos/historico/{{$treino->id}}" method="POST">
                                 @csrf
                                 <label for="data" class="form-control-label">Selecione a data em que o treino foi realizado:</label>
                                 <input class="form-control" type="date" name="data" max="{{date('Y-m-d')}}" required>
-                                <p class="text-secondary text-xs font-weight-bolder opacity-7 mt-3">O treino será registrado em seu Histórico de treinos.</p>
+                                <p class="text-secondary text-xs font-weight-bolder opacity-7 mt-3">O treino será registrado em seu Histórico de Treinos.</p>
                               </div>
                               <div class="modal-footer gap-2">
                                 <button type="button" class="btn bg-gradient-secondary shadow-secondary btn-sm m-0" data-bs-dismiss="modal">Cancelar</button>
@@ -128,14 +128,14 @@
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf
-                      @method('DELETE')
+                      @method('PUT')
                       <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$treino->id}}">Excluir</button>
                     </form>
                     @elsecan('professor')
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf
-                      @method('DELETE')
+                      @method('PUT')
                       <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$treino->id}}">Excluir</button>
                     </form>
                     @endcan
@@ -148,6 +148,7 @@
         </div>
       </div>
     </div>
+    {{$treinos->links()}}
   </div> 
 @endif
 <script>

@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/', [MenuController::class, '__invoke'])->name('dashboard');
     Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth');
-
+    
     //ROTAS ALUNOS
     
     Route::get('/alunos', [AlunoController::class, 'index']);
@@ -41,8 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/alunos/update/{id}', [AlunoController::class, 'update']);
     Route::get('/alunos/perfil/{id}', [AlunoController::class, 'showPerfil'])->name('aluno-perfil');
     Route::get('/alunos/treinos/{id}', [AlunoController::class, 'treinos']);
-    Route::delete('/alunos/deletar/{id}', [AlunoController::class, 'destroy']);
-
+    Route::put('/alunos/deletar/{id}', [AlunoController::class, 'destroy']);
+    Route::get('/alunos/historico/{id}', [TreinoController::class, 'indexHistorico']);
+    Route::post('/alunos/historico/{id}', [TreinoController::class, 'storeHistorico']);
+    
     //ROTAS PROFESSORES
     
     Route::get('/professores', [ProfessorController::class, 'index']);
@@ -75,5 +77,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/treinos/deletar/{id}', [TreinoController::class, 'destroy']);
     Route::get('/treinos/download/{id}', [PdfController::class, 'pdf']);
 
-    Route::post('/historico/{id}', [TreinoController::class, 'storeHistorico']);
 });

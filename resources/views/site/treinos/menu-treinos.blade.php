@@ -77,7 +77,8 @@
         </div>
       </div>
     </div>
-  </div> 
+    {{$treinos->links()}}
+  </div>
 @endif
 <script>
 

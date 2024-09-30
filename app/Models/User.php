@@ -50,22 +50,22 @@ class User extends Authenticatable
         ];
     }
 
-    public function treinos(){
-        return $this->belongsToMany(Treino::class);
-    }
-
+    
     public function assinatura(){
         return $this->hasOne(Assinatura::class);
     }
-
+    
     public function especialidades(){
         return $this->hasOne(Especialidade::class);
     }
-
+    
     public function horarios(){
         return $this->hasMany(Horario::class);
     }
-
+    
+    public function treinos(){
+        return $this->belongsToMany(Treino::class);
+    }
     public function permissions(){
         return $this->belongsToMany(Permission::class);
     }

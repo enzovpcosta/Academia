@@ -6,16 +6,14 @@
 
 {{-- @dd($alunos) --}}
 
-@if (count($alunos) == 0)
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
           <h6>Alunos</h6>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite aqui..."></form>
-            <a class="btn btn-link m-0" href="/alunos">Ver todos os alunos</a>
+          <div class="col-4">
+            <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o CPF do aluno"></form>
           </div>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>
@@ -23,29 +21,11 @@
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum aluno cadastrado</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-@else
-<div class="container-fluid py-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          <h6>Alunos</h6>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite aqui..."></form>
-            <a class="btn btn-link m-0" href="/alunos">Ver todos os alunos</a>
-          </div>
-          <div class="text-end">
-            <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>
-            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
-          </div>
-        </div>
-        <div class="card-body px-0 pt-0 pb-2">
+          @if ($alunos == 'menu')
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Digite o CPF do aluno!</p>
+          @elseif($alunos != 'menu' && count($alunos) == 0)
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum aluno registrado com o cpf: {{$search}}</p>
+          @else
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Exercicio;
+use App\Models\Historico;
 use App\Models\Treino;
 use App\Models\TreinoExercicio;
 use Faker\Core\Number;
@@ -22,7 +23,10 @@ class TreinoController extends Controller
         ])->first();
       //   dd($aluno);
             if($aluno){
-               $treinos = Treino::where('user_id',$aluno->id)->get();
+               $treinos = Treino::where([
+                  'user_id' => $aluno->id,
+                  'status' => 'ativo'
+               ])->paginate(10);
             } else {
                $treinos = [];
             }
@@ -178,13 +182,33 @@ class TreinoController extends Controller
 }
 
 public function destroy($id){
-   Treino::findOrFail($id)->delete();
+   $treino = Treino::findOrFail($id);
+   $treino->update([
+      'status' => 'inativo'
+   ]);
 
    return back()->with('msg', 'Treino excluído com sucesso');
 }
 
+public function indexHistorico($id){
+   $historico = Historico::where('user_id', $id)->with('treino')->orderBy('data', 'desc')->paginate(10);
+
+   return view('site.alunos.historico-alunos', ['historico' => $historico]);
+}
+
 public function storeHistorico(Request $request){
-   dd($request->all());
+   // dd($request->id);
+   $aluno = Treino::where('id', $request->id)->first();
+
+   $historico = new Historico;
+
+   $historico->treino_id = $request->id;
+   $historico->user_id = $aluno->user_id;
+   $historico->data = $request->data;
+
+   $historico->save();
+
+   return redirect('/alunos/treinos/'.auth()->user()->id)->with('msg', 'O treino foi salvo no histórico de treinos!');
 }
 
 }

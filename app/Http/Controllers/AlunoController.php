@@ -20,28 +20,27 @@ class AlunoController extends Controller
         
         $search = request('search');
 
-        if($search){
+            if($search){
 
-            $alunos = User::where([
-                'tipo' => 'aluno',
-                ['cpf', 'like', '%'.$search.'%']
-            ])->with('assinatura')->paginate(10);
+                $alunos = User::where([
+                    'tipo' => 'aluno',
+                    ['cpf', 'like', '%'.$search.'%']
+                ])->with('assinatura')->paginate(10);
 
-        } else {
-
-            $alunos = User::where('tipo', 'aluno')->with('assinatura')->paginate(10);
+            } else {
+                $alunos = 'menu';
+            }
         // dd($alunos);
-            $assinaturas = Assinatura::all();
-            foreach ($assinaturas as $assinatura){
-                if($assinatura->vencimento < date('Y-m-d')){
-                    Assinatura::where('user_id', $assinatura->user_id)->update([
-                        'ativo' => false,
-                    ]);
-                } else {
-                    Assinatura::where('user_id', $assinatura->user_id)->update([
-                        'ativo' => true,
-                    ]);
-                }
+        $assinaturas = Assinatura::all();
+        foreach ($assinaturas as $assinatura){
+            if($assinatura->vencimento < date('Y-m-d')){
+                Assinatura::where('user_id', $assinatura->user_id)->update([
+                    'ativo' => false,
+                ]);
+            } else {
+                Assinatura::where('user_id', $assinatura->user_id)->update([
+                    'ativo' => true,
+                ]);
             }
         }
 
@@ -155,15 +154,14 @@ class AlunoController extends Controller
     }
     
     public function update(Request $request){
-
+        
         $request->validate([
             'name' => 'required',
             'cpf' => 'required|size:14',
             'nascimento' => 'required|date',
-            'telefone' => 'required|size:15',
+            'contato' => 'required|size:15',
             'email' => 'required|email',
             'senha' => 'required|min:4',
-            'plano' => 'required',
             'image' => 'required'
         ], [
             'name.required' => 'Este campo é obrigatório',
@@ -171,32 +169,41 @@ class AlunoController extends Controller
             'cpf.size' => 'Digite um CPF válido',
             'nascimento.required' => 'Este campo é obrigatório',
             'nascimento.date' => 'Escolha uma data válida',
-            'telefone.required' => 'Este campo é obrigatório',
-            'telefone.size' => 'Digite um telefone válido',
+            'contato.required' => 'Este campo é obrigatório',
+            'contato.size' => 'Digite um telefone válido',
             'email.required' => 'Este campo é obrigatório',
             'email.email' => 'Digite um email válido',
             'senha.required' => 'Este campo é obrigatório',
             'senha.min' => 'A senha deve ter no mínimo :min caracteres',
-            'plano.required' => 'Este campo é obrigatório',
             'image.required' => 'Este campo é obrigatório',
         ]);
 
+        if(auth()->user()->hasPermission('admin') || auth()->user()->hasPermission('professor')){
+            $request->validate([
+                'plano' => 'required'
+            ], [
+                'plano.required' => 'Este campo é obrigatório'
+            ]);
+        }
+        
         $aluno = User::findOrFail($request->id);
-
+        
         $image_path = public_path('assets/img/alunos/'.$aluno->image);
-
+        
         if(file_exists($image_path)) {
             unlink($image_path);
         }
-
+        
+        
         if($request->hasFile('image') && $request->file('image')->isValid()){
             $requestImage = $request->image;
             $extension = $requestImage->extension();
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
-
+            
             $request->image->move(public_path('assets/img/alunos'), $imageName);
-
+            
         }
+        
         
         $aluno->update([
             'nome' => $request->name,
@@ -207,21 +214,22 @@ class AlunoController extends Controller
             'password' => $request->senha,
             'image' => $imageName
         ]);
-
+        
+        
         if(auth()->user()->hasPermission('admin') || auth()->user()->hasPermission('professor')){
             
             if($request->plano == 'Mensal'){
-    
+                
                 $vencimento = date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d'))));
-    
+                
             } elseif ($request->plano == 'Trimestral'){
-    
+                
                 $vencimento = date('Y-m-d', strtotime('+3 months', strtotime(date('Y-m-d'))));
-    
+                
             } elseif ($request->plano == 'Semestral'){
-    
+                
                 $vencimento = date('Y-m-d', strtotime('+6 months', strtotime(date('Y-m-d'))));
-    
+                
             } else {
                 $vencimento = date('Y-m-d', strtotime('+1 year', strtotime(date('Y-m-d'))));
             }
@@ -232,11 +240,10 @@ class AlunoController extends Controller
                 'obtencao' => date('Y-m-d'),
                 'vencimento' => $vencimento
             ]);
-
-            return redirect('/alunos')->with('msg', 'Aluno editado com sucesso');
+            
         }
-
-         return redirect('/alunos/perfil/'.$request->id)->with('msg', 'Editado com sucesso'); 
+        
+        return redirect('/alunos/perfil/'.$request->id)->with('msg', 'Editado com sucesso'); 
         
     }
 
@@ -265,7 +272,7 @@ class AlunoController extends Controller
     }
 
     public function treinos($id){
-        $treinos = Treino::where('user_id', $id)->get();
+        $treinos = Treino::where('user_id', $id)->paginate(10);
         $aluno = User::where('id', $id)->first();
         
         return view('site.alunos.treinos-alunos', ['treinos' => $treinos, 'aluno' => $aluno]);

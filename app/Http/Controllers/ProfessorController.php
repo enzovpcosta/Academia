@@ -23,11 +23,11 @@ class ProfessorController extends Controller
         if($search){
             $professores = User::where([
                 'tipo' => 'professor',
-                ['nome', 'like', '%'.$search.'%']
-            ])->with(['especialidades', 'horarios'])->paginate(8);
+                ['cpf', 'like', '%'.$search.'%']
+            ])->with(['especialidades', 'horarios'])->paginate(10);
         } else {
 
-        $professores = User::where('tipo','professor')->with(['especialidades', 'horarios'])->paginate(8);
+        $professores = 'menu';
         
     }
 
@@ -76,7 +76,7 @@ class ProfessorController extends Controller
 
         $professor->nome = $request->name;
         $professor->tipo = 'professor';
-        $professor->cpf = $request->cpf;
+        $professor->cpf = preg_replace('/[^A-Za-z0-9]/', '', $request->cpf);
         $professor->nascimento = $request->nascimento;
         $professor->contato = $request->telefone;
         $professor->email = $request->email;
@@ -457,7 +457,7 @@ class ProfessorController extends Controller
         
        $professor->update([
             'nome' => $request->name,
-            'cpf' => $request->cpf,
+            'cpf' => preg_replace('/[^A-Za-z0-9]/', '', $request->cpf),
             'nascimento' => $request->nascimento,
             'contato' => $request->telefone,
             'email' => $request->email,
@@ -469,7 +469,7 @@ class ProfessorController extends Controller
             "nome" => $request->especialidade
         ]);
         
-        return redirect('/professores')->with('msg', 'Professor editado com sucesso');
+        return redirect('/professores/perfil/'.$request->id)->with('msg', 'Professor editado com sucesso');
     }
 
     public function destroy($id){
