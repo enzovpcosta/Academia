@@ -65,7 +65,7 @@
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf
-                      @method('DELETE')
+                      @method('PUT')
                       <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$treino->id}}">Excluir</button>
                     </form>
                   </td>

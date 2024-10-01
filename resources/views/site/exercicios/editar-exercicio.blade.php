@@ -41,7 +41,7 @@
                       <option value="Tríceps">Tríceps</option>
                     </optgroup>
                     <optgroup label="Inferiores">
-                      <option value="Glúteo">Glúteo</option>
+                      <option value="Glúteos">Glúteos</option>
                       <option value="Panturrilha">Panturrilha</option>
                       <option value="Posterior de coxa">Posterior de coxa</option>
                       <option value="Quadríceps">Quadríceps</option>

@@ -10,6 +10,7 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TreinoController;
 use App\Models\Assinatura;
+use App\Models\Treino;
 use App\Models\User;
 use FontLib\Table\Type\name;
 
@@ -40,10 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/alunos/editar/{id}', [AlunoController::class, 'edit']);
     Route::put('/alunos/update/{id}', [AlunoController::class, 'update']);
     Route::get('/alunos/perfil/{id}', [AlunoController::class, 'showPerfil'])->name('aluno-perfil');
-    Route::get('/alunos/treinos/{id}', [AlunoController::class, 'treinos']);
-    Route::put('/alunos/deletar/{id}', [AlunoController::class, 'destroy']);
+    Route::get('/alunos/treinos/{id}', [AlunoController::class, 'treinos'])->name('aluno-treinos');
+    Route::delete('/alunos/deletar/{id}', [AlunoController::class, 'destroy']);
     Route::get('/alunos/historico/{id}', [TreinoController::class, 'indexHistorico']);
     Route::post('/alunos/historico/{id}', [TreinoController::class, 'storeHistorico']);
+    Route::get('/aluno/treino/{id}', [TreinoController::class, 'getTreino']);
     
     //ROTAS PROFESSORES
     
@@ -74,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/treinos/alunos', [TreinoController::class, 'alunos']);
     Route::get('/treinos/editar/{id}', [TreinoController::class, 'edit']);
     Route::put('/treinos/update/{id}', [TreinoController::class, 'update']);
-    Route::delete('/treinos/deletar/{id}', [TreinoController::class, 'destroy']);
+    Route::put('/treinos/deletar/{id}', [TreinoController::class, 'destroy']);
     Route::get('/treinos/download/{id}', [PdfController::class, 'pdf']);
 
 });

@@ -96,32 +96,7 @@
                   </td>
                   <td class="align-middle text-center">
                     @can('aluno')
-                    <button type="button" class="btn btn-link mb-0" data-bs-toggle="modal" data-bs-target="#{{str_replace(' ', '', $treino->nome)}}">Registrar</button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" id="{{str_replace(' ', '', $treino->nome)}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                          <div class="modal-header justify-content-center">
-                            <h1 class="fs-5" id="exampleModalLabel">Registrando treino: {{$treino->nome}}, no Histórico de treinos!</h1>
-                          </div>
-                          <div class="modal-body">
-                            <div class="form-group">
-                              <form action="/alunos/historico/{{$treino->id}}" method="POST">
-                                @csrf
-                                <label for="data" class="form-control-label">Selecione a data em que o treino foi realizado:</label>
-                                <input class="form-control" type="date" name="data" max="{{date('Y-m-d')}}" required>
-                                <p class="text-secondary text-xs font-weight-bolder opacity-7 mt-3">O treino será registrado em seu Histórico de Treinos.</p>
-                              </div>
-                              <div class="modal-footer gap-2">
-                                <button type="button" class="btn bg-gradient-secondary shadow-secondary btn-sm m-0" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn bg-gradient-info shadow-info btn-sm m-0">Enviar</button>
-                              </div>
-                              </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <button type="button" class="registrar btn btn-link mb-0" data-bs-toggle="modal" data-bs-target="#modal" value="{{$treino->id}}">Registrar</button>
                     @endcan
                     <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     @can('admin')
@@ -149,9 +124,49 @@
       </div>
     </div>
     {{$treinos->links()}}
-  </div> 
+  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <h1 class="fs-5" id="modalTitle"></h1>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <form method="POST" id="formRegistrar">
+                @csrf
+                <label for="data" class="form-control-label">Selecione a data em que o treino foi realizado:</label>
+                <input class="form-control" type="date" name="data" max="{{date('Y-m-d')}}" required>
+                <p class="text-secondary text-xs font-weight-bolder opacity-7 mt-3">O treino será registrado em seu Histórico de Treinos.</p>
+              </div>
+              <div class="modal-footer gap-2">
+                <button type="button" class="btn bg-gradient-secondary shadow-secondary btn-sm m-0" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn bg-gradient-info shadow-info btn-sm m-0">Enviar</button>
+              </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div> 
 @endif
 <script>
+  $('.registrar').click(function (e) { 
+    e.preventDefault();
+
+    var idTreino = $(this).val();
+
+    $.ajax({
+      type: "GET",
+      url: "/aluno/treino/"+idTreino,
+      success: function (response) {
+        const res = JSON.parse(response);
+        $('#modalTitle').text('Registrando treino: '+res[0].nome+', no Histórico de treinos!');
+        $('#formRegistrar').attr('action', '/alunos/historico/'+idTreino);
+      }
+    });
+    
+  });
 
   $('.excluir').click(function (e) { 
     e.preventDefault();

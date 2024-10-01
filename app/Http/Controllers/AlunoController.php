@@ -134,7 +134,7 @@ class AlunoController extends Controller
         $assinatura->user_id = $aluno->id;
         $assinatura->save();
 
-        return redirect('/alunos')->with('msg', 'Aluno cadastrado com sucesso!');
+        return redirect('/alunos?search='.$aluno->cpf)->with('msg', 'Aluno cadastrado com sucesso!');
 
     }
 
@@ -272,7 +272,10 @@ class AlunoController extends Controller
     }
 
     public function treinos($id){
-        $treinos = Treino::where('user_id', $id)->paginate(10);
+        $treinos = Treino::where([
+            'user_id' => $id,
+            'ativo' => true
+        ])->paginate(10);
         $aluno = User::where('id', $id)->first();
         
         return view('site.alunos.treinos-alunos', ['treinos' => $treinos, 'aluno' => $aluno]);

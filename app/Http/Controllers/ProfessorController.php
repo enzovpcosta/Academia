@@ -173,7 +173,7 @@ class ProfessorController extends Controller
 
         $especialidade->save();
 
-        return redirect('/professores')->with('msg', 'Professor cadastrado com sucesso!');
+        return redirect('/professores?search='.$professor->cpf)->with('msg', 'Professor cadastrado com sucesso!');
 
     }
 

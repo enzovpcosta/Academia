@@ -25,7 +25,7 @@ class TreinoController extends Controller
             if($aluno){
                $treinos = Treino::where([
                   'user_id' => $aluno->id,
-                  'status' => 'ativo'
+                  'ativo' => true
                ])->paginate(10);
             } else {
                $treinos = [];
@@ -82,6 +82,7 @@ class TreinoController extends Controller
       $treino->dias = $request->dias;
       $treino->user_id = $request->aluno;
       $treino->professor_id = $request->professor;
+      $treino->ativo = true;
 
       // dd($request->exercicio);
 
@@ -105,7 +106,9 @@ class TreinoController extends Controller
          // dd($treinoExercicio);
       }
 
-      return redirect('/treinos')->with('msg', 'Treino cadastrado com sucesso!');
+      $aluno = User::findOrFail($request->aluno);
+
+      return redirect('/treinos?search='.$aluno->cpf)->with('msg', 'Treino cadastrado com sucesso!');
 
    }
 
@@ -182,12 +185,12 @@ class TreinoController extends Controller
 }
 
 public function destroy($id){
-   $treino = Treino::findOrFail($id);
+   $treino = Treino::where('id', $id)->first();
    $treino->update([
-      'status' => 'inativo'
+      'ativo' => false
    ]);
 
-   return back()->with('msg', 'Treino excluído com sucesso');
+   return redirect('/alunos/treinos/'.$treino->user_id)->with('msg', 'Treino excluído com sucesso');
 }
 
 public function indexHistorico($id){
@@ -209,6 +212,13 @@ public function storeHistorico(Request $request){
    $historico->save();
 
    return redirect('/alunos/treinos/'.auth()->user()->id)->with('msg', 'O treino foi salvo no histórico de treinos!');
+}
+
+public function getTreino($id){
+   $treino = Treino::findOrFail($id);
+   return json_encode([
+      $treino
+   ]);
 }
 
 }
