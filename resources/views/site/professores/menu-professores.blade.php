@@ -26,7 +26,152 @@
           @elseif($professores != 'menu' && count($professores) == 0)
           <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum professor registrado com o cpf: {{$search}}</p>
           @else
-          <div class="table-responsive p-0">
+          <div class="accordion accordion-flush" id="accordionProfessores">
+            @foreach ($professores as $professor)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$professor->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$professor->id}}- {{$professor->nome}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{$professor->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">
+                <div class="accordion-body">
+                  <h5>Dados Pessoais</h5>
+                  <div class="mb-2">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" readonly value="{{$professor->nome}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="cpf form-control" readonly value="{{$professor->cpf}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" readonly value="{{$professor->contato}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Especialidades</label>
+                    <input type="text" class="form-control" readonly value="{{$professor->especialidades->nome}}">
+                  </div>
+                  <hr class="horizontal dark my-3">
+                  <div class="mb-2">
+                    <h5>Horário de trabalho</h5>
+                  </div>
+                  @foreach ($professor->horarios as $horario)
+                        @if ($horario->dia == "Segunda")
+                          @php
+                              $segunda = $horario->dia
+                          @endphp
+                        @elseif ($horario->dia == "Terça")
+                          @php
+                            $terca = $horario->dia
+                          @endphp
+                        @elseif ($horario->dia == "Quarta")
+                          @php
+                            $quarta = $horario->dia
+                          @endphp
+                        @elseif ($horario->dia == "Quinta")
+                          @php
+                            $quinta = $horario->dia
+                          @endphp
+                        @elseif ($horario->dia == "Sexta")
+                          @php
+                            $sexta = $horario->dia
+                          @endphp
+                        @elseif ($horario->dia == "Sábado")
+                          @php
+                            $sabado = $horario->dia
+                          @endphp
+                        @endif
+                      @endforeach
+                      @foreach ($professor->horarios as $horario)
+                      @if ($horario->dia == "Segunda")
+                        @php
+                            $segundaInicio = $horario->inicio;
+                            $segundaFim = $horario->fim;
+                        @endphp
+                      @elseif ($horario->dia == "Terça")
+                        @php
+                          $tercaInicio = $horario->inicio;
+                          $tercaFim = $horario->fim;
+                        @endphp
+                      @elseif ($horario->dia == "Quarta")
+                        @php
+                          $quartaInicio = $horario->inicio;
+                          $quartaFim = $horario->fim;
+                        @endphp
+                      @elseif ($horario->dia == "Quinta")
+                        @php
+                          $quintaInicio = $horario->inicio;
+                          $quintaFim = $horario->fim;
+                        @endphp
+                      @elseif ($horario->dia == "Sexta")
+                        @php
+                          $sextaInicio = $horario->inicio;
+                          $sextaFim = $horario->fim;
+                        @endphp
+                      @elseif ($horario->dia == "Sábado")
+                        @php
+                          $sabadoInicio = $horario->inicio;
+                          $sabadoFim = $horario->fim;
+                        @endphp
+                      @endif
+                    @endforeach
+                      @isset($segunda)
+                      <div class="mb-1">
+                        <label class="form-label">Segunda</label>
+                        <input type="text" class="form-control" readonly value="{{$segundaInicio}} às {{$segundaFim}}">
+                      </div>
+                      @endisset
+                      @isset($terca)
+                      <div class="mb-1">
+                        <label class="form-label">Terça</label>
+                        <input type="text" class="form-control" readonly value="{{$tercaInicio}} às {{$tercaFim}}">
+                      </div>
+                      @endisset
+                      @isset($quarta)
+                      <div class="mb-1">
+                        <label class="form-label">Quarta</label>
+                        <input type="text" class="form-control" readonly value="{{$quartaInicio}} às {{$quartaFim}}">
+                      </div>
+                      @endisset
+                      @isset($quinta)
+                      <div class="mb-1">
+                        <label class="form-label">Quinta</label>
+                        <input type="text" class="form-control" readonly value="{{$quintaInicio}} às {{$quintaFim}}">
+                      </div>
+                      @endisset
+                      @isset($sexta)
+                      <div class="mb-1">
+                        <label class="form-label">Sexta</label>
+                        <input type="text" class="form-control" readonly value="{{$sextaInicio}} às {{$sextaFim}}">
+                      </div>
+                      @endisset
+                      @isset($sabado)
+                      <div class="mb-1">
+                        <label class="form-label">Sábado</label>
+                        <input type="text" class="form-control" readonly value="{{$sabadoInicio}} às {{$sabadoFim}}">
+                      </div>
+                      @endisset
+                      <hr class="horizontal dark my-3">
+                  <div class="mb-2">
+                    <h5>Ações</h5>
+                    <div class="d-flex">
+                      <a class="btn btn-link text-success text-gradient mb-0 ps-1" href="/professores/treinos/{{$professor->id}}">Treinos</a>
+                      <a class="btn btn-link mb-0" href="/professores/editar/{{$professor->id}}">Editar</a>
+                      <form id="{{$professor->id}}" class="d-inline" action="/professores/deletar/{{$professor->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$professor->id}}">Excluir</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-professores">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>

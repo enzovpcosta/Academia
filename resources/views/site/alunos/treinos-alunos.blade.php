@@ -64,14 +64,47 @@
           @endcan
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
-            <table class="table align-items-center mb-0">
-              <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aluno</th>
+          <div class="accordion accordion-flush" id="accordionTreinosAlunos">
+            @foreach ($treinos as $treino)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$treino->id}}- {{$treino->nome}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{$treino->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">
+                <div class="accordion-body">
+                  <div class="mb-3">
+                    <label class="form-label">Nome do treino</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Dias em que o treino será realizado</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->dias}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nome do professor</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->professor->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Ações</label>
+                    <div class="d-flex">
+                      <button type="button" class="registrar btn btn-link mb-0 ps-1" data-bs-toggle="modal" data-bs-target="#modal" value="{{$treino->id}}">Registrar</button>
+                      <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-treinos-alunos">
+          <table class="table align-items-center mb-0">
+            <thead>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Professor</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
                 </tr>
@@ -87,9 +120,6 @@
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{$treino->dias}}</p>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{$treino->user->nome}}</p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{$treino->professor->nome}}</p>

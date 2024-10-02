@@ -11,7 +11,7 @@
   </title>
   <!--     Fonts and icons     -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.js" de></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
@@ -24,8 +24,8 @@
   <link id="pagestyle" href="{{asset('assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
   <link rel="shortcut icon" href="{{asset('assets/img/logo-white.png')}}" type="image/x-icon">
-    <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/js/core/popper.min.js')}}" ></script>
+    <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script>
    <!-- Github buttons -->
    <script async defer src="https://buttons.github.io/buttons.js"></script>
    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

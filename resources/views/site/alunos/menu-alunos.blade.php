@@ -26,7 +26,69 @@
           @elseif($alunos != 'menu' && count($alunos) == 0)
           <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum aluno registrado com o cpf: {{$search}}</p>
           @else
-          <div class="table-responsive p-0">
+          <div class="accordion accordion-flush" id="accordionAlunos">
+            @foreach ($alunos as $aluno)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$aluno->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$aluno->id}}- {{$aluno->nome}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{$aluno->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">
+                <div class="accordion-body">
+                  <h5>Dados Pessoais</h5>
+                  <div class="mb-2">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" readonly value="{{$aluno->nome}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="cpf form-control" readonly value="{{$aluno->cpf}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" readonly value="{{$aluno->contato}}">
+                  </div>
+                  <hr class="horizontal dark my-3">
+                  <h5>Assinatura</h5>
+                  <div class="mb-2">
+                    <label class="form-label">Plano</label>
+                    <input type="text" class="form-control" readonly value="{{$aluno->assinatura->plano}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Data de aquisição</label>
+                    <input type="email" class="tel form-control" readonly value="{{date('d/m/Y', strtotime($aluno->assinatura->obtencao))}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Data de vencimento</label>
+                    <input type="text" class="tel form-control" readonly value="{{date('d/m/Y', strtotime($aluno->assinatura->vencimento))}}">
+                  </div>
+                  <div class="mb-2 d-flex flex-column">
+                    <label class="form-label">Status</label>
+                    @if ($aluno->assinatura->ativo == true)
+                    <span class="col-md-1 badge badge-sm bg-gradient-success">Ativo</span>
+                    @else
+                    <span class="col-md-1 badge badge-sm bg-gradient-dark">Inativo</span>
+                    @endif
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Ações</label>
+                    <div class="d-flex">
+                      <a class="btn btn-link text-success text-gradient mb-0 ps-1" href="/alunos/treinos/{{$aluno->id}}">Treinos</a>
+                    <a class="btn btn-link mb-0" href="/alunos/editar/{{$aluno->id}}">Editar</a>
+                    <form id="{{$aluno->id}}" class="d-inline" action="/alunos/deletar/{{$aluno->id}}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$aluno->id}}">Excluir</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-alunos">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>

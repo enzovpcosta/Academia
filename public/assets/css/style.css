@@ -21,7 +21,6 @@ input::-webkit-inner-spin-button {
   left: 0;
   bottom: 0;
   width: 300px;
-  z-index: 996;
   transition: all 0.3s;
   padding: 20px;
   overflow-y: auto;
@@ -173,4 +172,44 @@ input::-webkit-inner-spin-button {
 
 .sidebar-nav .nav-content a.active i {
   background-color: #4154f1;
+}
+
+#accordionTreinosAlunos{
+  display: none;
+}
+
+#accordionAlunos{
+  display: none;
+}
+
+#accordionProfessores{
+  display: none;
+}
+
+@media (max-width: 600px){
+  #tabela-treinos-alunos{
+    display: none;
+  }
+  #accordionTreinosAlunos{
+    display: block;
+  }
+}
+
+@media (max-width: 1250px){
+  #tabela-professores{
+    display: none;
+  }
+  #accordionProfessores{
+    display: block;
+  }
+}
+
+
+@media (max-width: 1600px){
+  #tabela-alunos{
+    display: none;
+  }
+  #accordionAlunos{
+    display: block;
+  }
 }
