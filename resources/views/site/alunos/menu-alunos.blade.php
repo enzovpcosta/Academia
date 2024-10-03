@@ -10,10 +10,22 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-alunos-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            <h6 class="mt-0">Alunos</h6>
+            <div class="w-100 mb-0">
+              <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do aluno"></form>
+            </div>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
+        </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-alunos">
           <h6>Alunos</h6>
           <div class="col-4">
-            <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o CPF do aluno"></form>
+            <form action="/alunos" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do aluno"></form>
           </div>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/cadastrar">Cadastrar novo aluno</a>

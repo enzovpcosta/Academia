@@ -186,30 +186,62 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+#accordionTreinosAlunos,
+#accordionAlunos,
+#accordionProfessores,
+#header-alunos-responsive,
+#header-professores-responsive,
+#header-treinos-responsive,
+#header-historico-responsive{
+  display: none !important;
+}
+
+
 @media (max-width: 600px){
-  #tabela-treinos-alunos{
-    display: none;
+  #tabela-treinos-alunos,
+  #header-treinos,
+  #header-historico{
+    display: none !important;
   }
-  #accordionTreinosAlunos{
-    display: block;
+  #accordionTreinosAlunos,
+  #header-treinos-responsive,
+  #header-historico-responsive{
+    display: block !important;
+  }
+}
+
+@media (max-width: 650px){
+  #header-alunos{
+    display: none !important;
+  }
+  #header-alunos-responsive{
+    display: block !important;
+  }
+}
+
+@media (max-width: 730px){
+  #header-professores{
+    display: none !important;
+  }
+  #header-professores-responsive{
+    display: block !important;
   }
 }
 
 @media (max-width: 1250px){
   #tabela-professores{
-    display: none;
+    display: none !important;
   }
   #accordionProfessores{
-    display: block;
+    display: block !important;
   }
 }
 
-
 @media (max-width: 1600px){
   #tabela-alunos{
-    display: none;
+    display: none !important;
   }
   #accordionAlunos{
-    display: block;
+    display: block !important;
   }
 }

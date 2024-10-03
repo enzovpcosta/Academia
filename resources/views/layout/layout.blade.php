@@ -26,6 +26,10 @@
   <link rel="shortcut icon" href="{{asset('assets/img/logo-white.png')}}" type="image/x-icon">
     <script src="{{asset('assets/js/core/popper.min.js')}}" ></script>
     <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script>
+    <script src="{{asset('assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+  <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
    <!-- Github buttons -->
    <script async defer src="https://buttons.github.io/buttons.js"></script>
    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
@@ -48,7 +52,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
   <div id="img-header" class="min-height-300 position-absolute w-100"></div>
-  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 ">
+  <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="aside">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="/">
@@ -193,7 +197,17 @@
           </ol>
           <h6 class="font-weight-bolder text-white mb-0">@yield('title')</h6>
         </nav>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        {{-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group">
+              <form action="/logout" method="POST">
+                @csrf
+                <button type="submit" class="btn bg-gradient-danger shadow-danger btn-sm w-100 m-0">Sair</button>
+              </form>
+            </div>
+          </div>
+        </div> --}}
+        <div class="mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
               <form action="/logout" method="POST">
@@ -236,6 +250,101 @@
         a = 1
       }
     }
+
+    $('#iconNavbarSidenav').click(function (e) { 
+      e.preventDefault();
+      const aside = document.getElementById('aside')
+      aside.style.right = '3000px'
+    });
+    var ctx1 = document.getElementById("chart-line").getContext("2d");
+
+var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+new Chart(ctx1, {
+  type: "line",
+  data: {
+    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    datasets: [{
+      label: "Mobile apps",
+      tension: 0.4,
+      borderWidth: 0,
+      pointRadius: 0,
+      borderColor: "#5e72e4",
+      backgroundColor: gradientStroke1,
+      borderWidth: 3,
+      fill: true,
+      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+      maxBarThickness: 6
+
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      }
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index',
+    },
+    scales: {
+      y: {
+        grid: {
+          drawBorder: false,
+          display: true,
+          drawOnChartArea: true,
+          drawTicks: false,
+          borderDash: [5, 5]
+        },
+        ticks: {
+          display: true,
+          padding: 10,
+          color: '#fbfbfb',
+          font: {
+            size: 11,
+            family: "Open Sans",
+            style: 'normal',
+            lineHeight: 2
+          },
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false,
+          drawOnChartArea: false,
+          drawTicks: false,
+          borderDash: [5, 5]
+        },
+        ticks: {
+          display: true,
+          color: '#ccc',
+          padding: 20,
+          font: {
+            size: 11,
+            family: "Open Sans",
+            style: 'normal',
+            lineHeight: 2
+          },
+        }
+      },
+    },
+  },
+
+});
+var win = navigator.platform.indexOf('Win') > -1;
+if (win && document.querySelector('#sidenav-scrollbar')) {
+  var options = {
+    damping: '0.5'
+  }
+  Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+}
   </script>
   </body>
   </html>

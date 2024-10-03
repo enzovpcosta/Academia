@@ -10,10 +10,22 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-professores-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            <h6 class="mt-0">Professores</h6>
+            <div class="w-100 mb-0">
+              <form action="/professores" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11"  placeholder="Digite o CPF do professor"></form>
+            </div>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn bg-gradient-info shadow-info m-0" href="/professores/cadastrar">Cadastrar novo professor</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
+        </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-professores">
           <h6>Professores</h6>
           <div class="col-4">
-            <form action="/professores" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite aqui..."></form>
+            <form action="/professores" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do professor"></form>
           </div>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/professores/cadastrar">Cadastrar novo professor</a>

@@ -30,6 +30,9 @@
                 <div class="form-group">
                   <label for="cpf" class="form-control-label">CPF</label>
                   <input class="cpf form-control" type="text" name="cpf" placeholder="Digite o cpf" value="{{old('cpf')}}">
+                  @error('error')
+                    <span class="text-danger">{{$message}}</span>
+                  @enderror
                   @error('cpf')
                       <span class="text-danger">{{$message}}</span>
                   @enderror

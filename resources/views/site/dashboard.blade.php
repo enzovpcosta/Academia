@@ -195,7 +195,7 @@
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                <i class="bi bi-lightning-charge-fill text-lg text-sm opacity-10"></i>
+                <i class="bi bi-lightning-charge-fill opacity-10"></i>
               </div>
             </div>
           </div>
@@ -213,14 +213,32 @@
               </div>
             </div>
             <div class="col-4 d-flex justify-content-end">
-              <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle d-flex align-items-center justify-content-center">
-                <ion-icon class="text-light" name="barbell-outline"></ion-icon>
+              <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                <i class="bi bi-currency-dollar"></i>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+      <div class="card h-100">
+        <a href="/alunos/historico/{{auth()->user()->id}}" class="card-body p-3">
+          <div class="row">
+            <div class="col-8 d-flex align-items-center">
+                <h5 class="font-weight-bolder">
+                  Histórico
+                </h5>
+            </div>
+            <div class="col-4 text-end">
+              <div class="icon icon-shape bg-gradient-info shadow-info text-center rounded-circle">
+                <i class="bi bi-calendar4 text-light opacity-10"></i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>  
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card h-100">
         <a href="/alunos/perfil/{{auth()->user()->id}}" class="card-body p-3">

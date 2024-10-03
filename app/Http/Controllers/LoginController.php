@@ -35,21 +35,10 @@ class LoginController extends Controller
         return back()->withErrors(['error' => 'Email ou senha inválida!']);
         }
         
-        if($user->tipo == 'admin'){
-            if($request->password == $user->password){
-                $user->assignPermission($user->tipo);
-                auth()->login($user);
-         
-                Auth::loginUsingId($user->id);
-
-                return redirect()->route('dashboard');
-            }
-        }
-
-
        if(!Hash::check($request->password, $user->password)){
         return back()->withErrors(['error' => 'Email ou senha inválida!']);
        }
+       
        if($user->hasPermission($user->tipo) == false){
            $user->assignPermission($user->tipo);
        }

@@ -30,7 +30,16 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-historico-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            <h6 class="mt-0">Histórico de Treinos</h6>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/treinos/{{auth()->user()->id}}">Meus Treinos</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
+        </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-historico">
           <h6>Histórico de Treinos</h6>
           <div class="text-end">
             <a class="btn bg-gradient-info shadow-info m-0" href="/alunos/treinos/{{auth()->user()->id}}">Meus Treinos</a>

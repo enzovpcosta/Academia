@@ -33,6 +33,9 @@
                   @error('cpf')
                       <span class="text-danger">{{$message}}</span>
                   @enderror
+                  @error('error')
+                      <span class="text-danger">{{$message}}</span>
+                  @enderror
                 </div>
               </div>
               <div class="col-md-6">

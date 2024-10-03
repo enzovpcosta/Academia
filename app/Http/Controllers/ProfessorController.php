@@ -72,6 +72,10 @@ class ProfessorController extends Controller
             'image.required' => 'Este campo é obrigatório',
         ]);
 
+        if(count(User::where('cpf', preg_replace('/[^A-Za-z0-9]/', '', $request->cpf))->get()) > 0){
+            return back()->withErrors(['error' => 'CPF já cadastrado!']);
+        }
+
         $professor = new User;
 
         $professor->nome = $request->name;
