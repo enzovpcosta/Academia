@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/professores/update/{id}', [ProfessorController::class, 'update']);
     Route::delete('/professores/deletar/{id}', [ProfessorController::class, 'destroy']);
     Route::get('/professores/perfil/{id}', [ProfessorController::class, 'showPerfil']);
-    Route::get('/professores/treinos/{id}', [ProfessorController::class, 'treinos']);
+    Route::get('/professor/treinos/{id}', [ProfessorController::class, 'treinos']);
     
     //ROTAS EXERCICIOS
     

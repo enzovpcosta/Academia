@@ -70,7 +70,7 @@
                     <p class="text-xs font-weight-bold mb-0">{{date('d/m/Y', strtotime($treinos->data))}}</p>
                   </td>
                   <td class="align-middle text-center">
-                    <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treinos->treino_id}}">Ver treino</a>
+                    <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treinos->treino_id}}">Ver treino</a>
                   </td>
                 </tr>
                 @endforeach

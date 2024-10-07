@@ -90,7 +90,7 @@
                     <label class="form-label">Ações</label>
                     <div class="d-flex">
                       <button type="button" class="registrar btn btn-link mb-0 ps-1" data-bs-toggle="modal" data-bs-target="#modal" value="{{$treino->id}}">Registrar</button>
-                      <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                      <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
                     @can('aluno')
                     <button type="button" class="registrar btn btn-link mb-0" data-bs-toggle="modal" data-bs-target="#modal" value="{{$treino->id}}">Registrar</button>
                     @endcan
-                    <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                    <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     @can('admin')
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">

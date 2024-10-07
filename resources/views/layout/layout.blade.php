@@ -120,6 +120,9 @@
             <li class="nav-item">
               <a class="nav-link text-xs" href="/treinos/cadastrar">Criar treino</a>
             </li>
+            @can('professor')
+              <a class="nav-link text-xs" href="/professor/treinos/{{auth()->user()->id}}">Meus treinos</a>
+            @endcan
           </ul>
         </li>
         <li class="nav-item my-1 disabled">

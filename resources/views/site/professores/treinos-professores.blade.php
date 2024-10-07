@@ -34,7 +34,11 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+          @can('admin')
           <h6>Treinos criados por: <span class="text-secondary">{{$professor->nome}}</span></h6>
+          @elsecan('professor')
+          <h6>Meus treinos</h6>
+          @endcan
           <div class="text-end">
             <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
@@ -71,7 +75,7 @@
                     <p class="text-xs font-weight-bold mb-0">{{$treino->professor->nome}}</p>
                   </td>
                   <td class="align-middle text-center">
-                    <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                    <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf

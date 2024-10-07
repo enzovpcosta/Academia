@@ -121,7 +121,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card h-100">
-        <a href="/treinos" class="card-body p-3">
+        <a href="/professor/treinos/{{auth()->user()->id}}" class="card-body p-3">
           <div class="row">
             <div class="col-8">
               <div class="numbers">

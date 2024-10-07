@@ -73,7 +73,7 @@
                     <p class="text-xs font-weight-bold mb-0">{{$treino->professor->nome}}</p>
                   </td>
                   <td class="align-middle text-center">
-                    <a class="btn btn-link text-success text-gradient mb-0" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                    <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf
