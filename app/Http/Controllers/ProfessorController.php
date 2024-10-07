@@ -75,6 +75,9 @@ class ProfessorController extends Controller
         if(count(User::where('cpf', preg_replace('/[^A-Za-z0-9]/', '', $request->cpf))->get()) > 0){
             return back()->withErrors(['error' => 'CPF já cadastrado!']);
         }
+        if(count(User::where('email', $request->email)->get()) > 0){
+            return back()->withErrors(['errorEmail' => 'Email já cadastrado!']);
+        }
 
         $professor = new User;
 

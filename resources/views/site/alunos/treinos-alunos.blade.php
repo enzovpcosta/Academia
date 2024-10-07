@@ -157,10 +157,10 @@
   </div>
     <!-- Modal -->
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header justify-content-center">
-            <h1 class="fs-5" id="modalTitle"></h1>
+            <h3 class="fs-5" id="modalTitle"></h3>
           </div>
           <div class="modal-body">
             <div class="form-group">
