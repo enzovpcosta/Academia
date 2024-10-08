@@ -11,10 +11,23 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          <h6>Exercícios</h6>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 header-exercicios-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            <h5 class="mt-0">Exercícios</h5>
+            <div class="w-100 mb-0">
+              <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o nome do exercício"></form>
+            </div>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn btn-outline-primary m-0" href="/exercicios">Ver todos os exercicios</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/exercicios/cadastrar">Cadastrar exercício</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
+        </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 mx-1 header-exercicios">
+          <h5>Exercícios</h5>
           <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite aqui..."></form>
+            <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o nome do exercício"></form>
             <a class="btn btn-link m-0" href="/exercicios">Ver todos os exercicios</a>
           </div>
           <div class="text-end">
@@ -34,10 +47,23 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          <h6>Exercícios</h6>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 header-exercicios-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            <h5 class="mt-0">Exercícios</h5>
+            <div class="w-100 mb-0">
+              <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o nome do exercício"></form>
+            </div>
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn btn-outline-primary m-0" href="/exercicios">Ver todos os exercicios</a>
+            <a class="btn bg-gradient-info shadow-info m-0" href="/exercicios/cadastrar">Cadastrar exercício</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
+        </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 mx-1 header-exercicios">
+          <h5>Exercícios</h5>
           <div class="col-4 d-flex justify-content-center align-items-center">
-            <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite aqui..."></form>
+            <form action="/exercicios" method="GET"><input type="text" id="search" name="search" class="form-control" placeholder="Digite o nome do exercício"></form>
             <a class="btn btn-link m-0" href="/exercicios">Ver todos os exercicios</a>
           </div>
           <div class="text-end">
@@ -46,7 +72,42 @@
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
+          <div class="accordion accordion-flush" id="accordionExercicios">
+            @foreach ($exercicios as $exercicio)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$exercicio->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$exercicio->nome}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{$exercicio->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionExercicios">
+                <div class="accordion-body">
+                  <h5>Informações</h5>
+                  <div class="mb-2">
+                    <label class="form-label">Nome do exercício</label>
+                    <input type="text" class="form-control" readonly value="{{$exercicio->nome}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Músculo</label>
+                    <input type="text" class="form-control" readonly value="{{$exercicio->musculo}}">
+                  </div>
+                  <div class="mb-2">
+                    <label class="form-label">Ações</label>
+                    <div class="d-flex">
+                      <a class="btn btn-link ps-1 mb-0" href="/exercicios/editar/{{$exercicio->id}}">Editar</a>
+                      <form id="{{$exercicio->id}}" class="d-inline" action="/exercicios/deletar/{{$exercicio->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$exercicio->id}}">Excluir</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-exercicios">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>

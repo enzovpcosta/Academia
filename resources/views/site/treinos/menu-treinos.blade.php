@@ -16,7 +16,7 @@
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-treinos-responsive">
           <div class="d-flex flex-column justify-content-between mb-2">
-            <h6 class="mt-0">Treinos</h6>
+            <h5 class="mt-0">Treinos</h5>
             <div class="w-100 mb-0">
               <form action="/treinos" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do aluno"></form>
             </div>
@@ -26,8 +26,8 @@
             <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-treinos">
-          <h6>Treinos</h6>
+        <div class="card-header ps-3 pb-0 d-flex justify-content-between align-items-center my-2 mx-1" id="header-treinos">
+          <h5>Treinos</h5>
           <div class="col-4">
             <form action="/treinos" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do aluno"></form>
           </div>
@@ -42,12 +42,54 @@
           @elseif($treinos != 'menu' && count($treinos) == 0)
           <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado para o cpf: {{$search}}</p>
           @else
-          <div class="table-responsive p-0">
+          <div class="accordion accordion-flush" id="accordionTreinos">
+            @foreach ($treinos as $treino)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$treino->nome}}
+                </button>
+              </h2>
+              <div id="flush-collapse{{$treino->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinos">
+                <div class="accordion-body">
+                  <div class="mb-3">
+                    <label class="form-label">Nome do treino</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Dias em que o treino será realizado</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->dias}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nome do aluno</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->user->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nome do professor</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->professor->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Ações</label>
+                    <div class="d-flex">
+                      <a class="btn btn-link text-success text-gradient mb-0 ps-1" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                      <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
+                      <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$treino->id}}">Excluir</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-treinos">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aluno</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Professor</th>
@@ -58,10 +100,7 @@
                 @foreach ($treinos as $treino)
                 <tr>
                   <td>
-                    <h6 class="mb-0 text-sm ps-3">{{$treino->id}}</h6>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{$treino->nome}}</p>
+                    <p class="text-xs font-weight-bold mb-0 ps-3">{{$treino->nome}}</p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{$treino->dias}}</p>

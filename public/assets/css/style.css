@@ -174,30 +174,30 @@ input::-webkit-inner-spin-button {
   background-color: #4154f1;
 }
 
-#accordionTreinosAlunos{
-  display: none;
-}
-
-#accordionAlunos{
-  display: none;
-}
-
-#accordionProfessores{
-  display: none;
-}
-
+#accordionTreinosProfessores,
+#accordionTreinos,
+#accordionExercicios,
 #accordionTreinosAlunos,
 #accordionAlunos,
 #accordionProfessores,
 #header-alunos-responsive,
 #header-professores-responsive,
 #header-treinos-responsive,
+.header-exercicios-responsive,
 #header-historico-responsive{
   display: none !important;
 }
 
+@media (max-width: 900px){
+  .header-exercicios{
+    display: none !important;
+  }
+  .header-exercicios-responsive{
+    display: block !important;
+  }
+}
 
-@media (max-width: 600px){
+@media (max-width: 620px){
   #tabela-treinos-alunos,
   #header-treinos,
   #header-historico{
@@ -211,19 +211,19 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-width: 650px){
-  #header-alunos{
+  #header-alunos,  #tabela-exercicios{
     display: none !important;
   }
-  #header-alunos-responsive{
+  #header-alunos-responsive, #accordionExercicios{
     display: block !important;
   }
 }
 
-@media (max-width: 730px){
-  #header-professores{
+@media (max-width: 760px){
+  #header-professores, #tabela-treinos, #tabela-treinos-professores{
     display: none !important;
   }
-  #header-professores-responsive{
+  #header-professores-responsive, #accordionTreinos, #accordionTreinosProfessores{
     display: block !important;
   }
 }

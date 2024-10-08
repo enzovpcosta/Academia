@@ -12,7 +12,7 @@
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-professores-responsive">
           <div class="d-flex flex-column justify-content-between mb-2">
-            <h6 class="mt-0">Professores</h6>
+            <h5 class="mt-0">Professores</h5>
             <div class="w-100 mb-0">
               <form action="/professores" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11"  placeholder="Digite o CPF do professor"></form>
             </div>
@@ -22,8 +22,8 @@
             <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2" id="header-professores">
-          <h6>Professores</h6>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 mx-1" id="header-professores">
+          <h5>Professores</h5>
           <div class="col-4">
             <form action="/professores" method="GET"><input type="text" id="search" name="search" class="form-control" maxlength="11" placeholder="Digite o CPF do professor"></form>
           </div>
@@ -43,7 +43,17 @@
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$professor->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
-                  {{$professor->id}}- {{$professor->nome}}
+                  <div class="d-flex px-2 py-1">
+                    <div>
+                      <a href="/professores/perfil/{{$professor->id}}">
+                        <img src="../assets/img/professores/{{$professor->image}}" class="avatar avatar-sm me-3" alt="{{$professor->image}}">
+                      </a>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{$professor->nome}}</h6>
+                      <p class="text-xs text-secondary mb-0">{{$professor->email}}</p>
+                    </div>
+                  </div>
                 </button>
               </h2>
               <div id="flush-collapse{{$professor->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">

@@ -16,7 +16,7 @@
     <div class="col-12">
       <div class="card mb-4">
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          <h6>Treinos criados por: <span class="text-secondary">{{$professor->nome}}</span></h6>
+          <h5>Treinos criados por: <span class="text-secondary">{{$professor->nome}}</span></h5>
           <div class="text-end">
             <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
@@ -33,23 +33,61 @@
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center mt-2 mb-4">
           @can('admin')
           <h6>Treinos criados por: <span class="text-secondary">{{$professor->nome}}</span></h6>
           @elsecan('professor')
-          <h6>Meus treinos</h6>
+          <h5>Meus Treinos</h5>
           @endcan
           <div class="text-end">
             <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
+          <div class="accordion accordion-flush" id="accordionTreinosProfessores">
+            @foreach ($treinos as $treino)
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed border-top text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$treino->nome}} ({{$treino->user->nome}})
+                </button>
+              </h2>
+              <div id="flush-collapse{{$treino->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">
+                <div class="accordion-body">
+                  <div class="mb-3">
+                    <label class="form-label">Nome do treino</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Dias em que o treino será realizado</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->dias}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Nome do aluno</label>
+                    <input type="text" class="form-control" readonly value="{{$treino->user->nome}}">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Ações</label>
+                    <div class="d-flex">
+                      <a class="btn btn-link text-success text-gradient mb-0 ps-1" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
+                    <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
+                    <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$treino->id}}">Excluir</button>
+                    </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            @endforeach
+          </div>
+          <div class="table-responsive p-0" id="tabela-treinos-professores">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aluno</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">professor</th>
@@ -60,10 +98,7 @@
                 @foreach ($treinos as $treino)
                 <tr>
                   <td>
-                    <h6 class="mb-0 text-sm ps-3">{{$treino->id}}</h6>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{$treino->nome}}</p>
+                    <p class="text-xs font-weight-bold mb-0 ps-3">{{$treino->nome}}</p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{$treino->dias}}</p>

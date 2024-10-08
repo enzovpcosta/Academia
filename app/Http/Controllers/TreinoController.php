@@ -19,7 +19,7 @@ class TreinoController extends Controller
       if($search){
          $aluno = User::where([
             'tipo' => 'aluno',
-            ['cpf', 'like', '%'.$search.'%']
+            'cpf' => $search
         ])->first();
       //   dd($aluno);
             if($aluno){
