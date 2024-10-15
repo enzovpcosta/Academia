@@ -38,7 +38,7 @@
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           @if ($treinos == 'menu')
-          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Digite o CPF do aluno no campo de pesquisa para ver seus treinos!</p>
+          <p class="text-sm mb-0 text-uppercase font-weight-bold px-4 mb-2">Digite o CPF do aluno no campo de pesquisa para ver seus treinos!</p>
           @elseif($treinos != 'menu' && count($treinos) == 0)
           <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado para o cpf: {{$search}}</p>
           @else
@@ -46,7 +46,7 @@
             @foreach ($treinos as $treino)
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button class="accordion-button collapsed border-top text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
                   {{$treino->nome}}
                 </button>
               </h2>

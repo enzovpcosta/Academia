@@ -102,8 +102,7 @@
           <table class="table align-items-center mb-0">
             <thead>
               <tr>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nome</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nome</th>
                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Professor</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
@@ -113,10 +112,7 @@
                 @foreach ($treinos as $treino)
                 <tr>
                   <td>
-                    <h6 class="mb-0 text-sm ps-3">{{$treino->id}}</h6>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{$treino->nome}}</p>
+                    <p class="text-xs font-weight-bold mb-0 ps-3">{{$treino->nome}}</p>
                   </td>
                   <td>
                     <p class="text-xs font-weight-bold mb-0">{{$treino->dias}}</p>

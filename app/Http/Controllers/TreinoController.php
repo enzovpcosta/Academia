@@ -89,7 +89,7 @@ class TreinoController extends Controller
       $treino->save();
 
       // dd($treino->id);
-      $i = 0;
+      // $i = 0;
 
       for($i = 0;$i<count($request->exercicio);$i++){
          $treinoExercicio = new TreinoExercicio;
@@ -99,6 +99,8 @@ class TreinoController extends Controller
          $treinoExercicio->series = $request->series[$i];
          $treinoExercicio->reps = $request->reps[$i];
          $treinoExercicio->carga = $request->carga[$i];
+         $treinoExercicio->intervalo = $request->intervalo[$i];
+         $treinoExercicio->observacoes = $request->observacoes[$i];
          // dd($treinoExercicio);
 
          $treinoExercicio->save();
@@ -130,7 +132,7 @@ class TreinoController extends Controller
       'dias' => $request->dias,
    ]);
 
-   $i = 0;
+   // $i = 0;
 
    for($i = 0;$i<count($request->exercicio);$i++){
       $exercicio = TreinoExercicio::where([
@@ -146,7 +148,9 @@ class TreinoController extends Controller
          ])->update([
             'series' => $request->series[$i],
             'reps' => $request->reps[$i],
-            'carga' => $request->carga[$i]
+            'carga' => $request->carga[$i],
+            'intervalo' => $request->intervalo[$i],
+            'observacoes' => $request->observacoes[$i]
          ]);
       } else {
          $treinoExercicio = new TreinoExercicio;
@@ -156,6 +160,8 @@ class TreinoController extends Controller
          $treinoExercicio->series = $request->series[$i];
          $treinoExercicio->reps = $request->reps[$i];
          $treinoExercicio->carga = $request->carga[$i];
+         $treinoExercicio->intervalo = $request->intervalo[$i];
+         $treinoExercicio->observacoes = $request->observacoes[$i];
          // dd($treinoExercicio);
 
          $treinoExercicio->save();

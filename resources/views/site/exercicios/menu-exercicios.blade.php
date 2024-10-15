@@ -76,7 +76,7 @@
             @foreach ($exercicios as $exercicio)
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$exercicio->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button class="accordion-button collapsed border-top text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$exercicio->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
                   {{$exercicio->nome}}
                 </button>
               </h2>

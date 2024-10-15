@@ -30,6 +30,8 @@
                 <th>Séries</th>
                 <th>Repetições</th>
                 <th>Carga</th>
+                <th>Intervalo</th>
+                <th>Observações</th>
             </tr>
             @foreach ($exercicios as $exercicio)
                 <tr>
@@ -37,6 +39,8 @@
                     <td>{{$exercicio->series}}</td>
                     <td>{{$exercicio->reps}}</td>
                     <td>{{$exercicio->carga}}</td>
+                    <td>{{$exercicio->intervalo}}</td>
+                    <td>{{$exercicio->observacoes}}</td>
                 </tr>
             @endforeach
         </table>

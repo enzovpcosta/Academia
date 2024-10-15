@@ -42,7 +42,7 @@
             @foreach ($alunos as $aluno)
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$aluno->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button class="accordion-button collapsed border-top text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$aluno->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
                   <div class="d-flex px-2 py-1">
                     <div>
                       <a href="/alunos/perfil/{{$aluno->id}}">
