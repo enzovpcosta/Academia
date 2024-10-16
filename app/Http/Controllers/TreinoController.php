@@ -202,7 +202,7 @@ public function destroy($id){
 public function indexHistorico($id){
    $historico = Historico::where('user_id', $id)->with('treino')->orderBy('data', 'desc')->paginate(10);
 
-   return view('site.alunos.historico-alunos', ['historico' => $historico]);
+   return view('site.alunos.historico-alunos', ['historico' => $historico, 'idAluno' => $id]);
 }
 
 public function storeHistorico(Request $request){

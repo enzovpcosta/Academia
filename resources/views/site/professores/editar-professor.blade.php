@@ -99,25 +99,129 @@
                 <p class="text-uppercase text-sm m-0">Horário de trabalho</p>
               </div>
 
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
-                    <label class="form-control-label">Segunda:</label>
-                  </div>
-                  <div class="col-auto">
+              <div class="d-flex gap-3" id="horarioProfResponsive">
+                <div class="col-md-auto d-flex flex-column gap-4 pt-2">
+                    <label class="form-control-label mb-0">Segunda:</label>
+                    <label class="form-control-label mb-0">Terça:</label>
+                    <label class="form-control-label mb-0">Quarta:</label>
+                    <label class="form-control-label mb-0">Quinta:</label>
+                    <label class="form-control-label mb-0">Sexta:</label>
+                    <label class="form-control-label mb-0">Sábado:</label>
+                </div>
+                <div class="w-100 d-flex flex-column gap-1">
+                  <div class="d-flex align-items-center">
                     <input type="text" class="time form-control" name="segundaInicio" placeholder="Início" 
-                      @foreach ($professor->horarios as $horario)
-                        @if ($horario->dia == "Segunda")
-                          value="{{$horario->inicio}}"    
-                        @endif
-                      @endforeach>
-                  </div>
-                  <div class="col-auto mx-2">
-                    às
-                  </div>
-                  <div class="col-auto">
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Segunda")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
                     <input type="text" class="time form-control" name="segundaFim" placeholder="Término" 
                     @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Segunda")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input type="text" class="time form-control" name="tercaInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Terça")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
+                    <input type="text" class="time form-control" name="tercaFim" placeholder="Término" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Terça")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input type="text" class="time form-control" name="quartaInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Quarta")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
+                    <input type="text" class="time form-control" name="quartaFim" placeholder="Término" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Quarta")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input type="text" class="time form-control" name="quintaInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Quinta")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
+                    <input type="text" class="time form-control" name="quintaFim" placeholder="Término" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Quinta")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input type="text" class="time form-control" name="sextaInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Sexta")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
+                    <input type="text" class="time form-control" name="sextaFim" placeholder="Término" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Sexta")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <input type="text" class="time form-control" name="sabadoInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Sábado")
+                      value="{{$horario->inicio}}"    
+                    @endif
+                  @endforeach>
+                    <span class="mx-2">às</span>
+                    <input type="text" class="time form-control" name="sabadoFim" placeholder="Término" 
+                    @foreach ($professor->horarios as $horario)
+                    @if ($horario->dia == "Sábado")
+                      value="{{$horario->fim}}"    
+                    @endif
+                  @endforeach>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
+                    <label class="form-control-label">Segunda:</label>
+                  </div>
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="segundaInicio" placeholder="Início" 
+                    @foreach ($professor->horarios as $horario)
+                      @if ($horario->dia == "Segunda")
+                        value="{{$horario->inicio}}"    
+                      @endif
+                    @endforeach>
+                  </div>
+                  <div class="mx-2">
+                    às
+                  </div>
+                  <div>
+                    <input type="text" class="time form-control" name="segundaFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Segunda")
                           value="{{$horario->fim}}"    
                         @endif
@@ -125,131 +229,131 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
                     <label class="form-control-label">Terça:</label>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="tercaInicio" placeholder="Início"
-                    @foreach ($professor->horarios as $horario)
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="tercaInicio" placeholder="Início"  
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Terça")
                           value="{{$horario->inicio}}"    
                         @endif
                       @endforeach>
                   </div>
-                  <div class="col-auto mx-2">
+                  <div class="mx-2">
                     às
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="tercaFim" placeholder="Término"
-                    @foreach ($professor->horarios as $horario)
+                  <div>
+                    <input type="text" class="time form-control" name="tercaFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Terça")
-                          value="{{$horario->inicio}}"    
+                          value="{{$horario->fim}}"    
                         @endif
                       @endforeach>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
                     <label class="form-control-label">Quarta:</label>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="quartaInicio" placeholder="Início"
-                    @foreach ($professor->horarios as $horario)
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="quartaInicio" placeholder="Início" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Quarta")
                           value="{{$horario->inicio}}"    
                         @endif
                       @endforeach>
                   </div>
-                  <div class="col-auto mx-2">
+                  <div class="mx-2">
                     às
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="quartaFim" placeholder="Término"
-                    @foreach ($professor->horarios as $horario)
+                  <div>
+                    <input type="text" class="time form-control" name="quartaFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Quarta")
-                          value="{{$horario->inicio}}"    
+                          value="{{$horario->fim}}"    
                         @endif
                       @endforeach>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
                     <label class="form-control-label">Quinta:</label>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="quintaInicio" placeholder="Início"
-                    @foreach ($professor->horarios as $horario)
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="quintaInicio" placeholder="Início" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Quinta")
                           value="{{$horario->inicio}}"    
                         @endif
                       @endforeach>
                   </div>
-                  <div class="col-auto mx-2">
+                  <div class="mx-2">
                     às
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="quintaFim" placeholder="Término"
-                    @foreach ($professor->horarios as $horario)
+                  <div>
+                    <input type="text" class="time form-control" name="quintaFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Quinta")
-                          value="{{$horario->inicio}}"    
+                          value="{{$horario->fim}}"    
                         @endif
                       @endforeach>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
                     <label class="form-control-label">Sexta:</label>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="sextaInicio" placeholder="Início"
-                    @foreach ($professor->horarios as $horario)
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="sextaInicio" placeholder="Início" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Sexta")
                           value="{{$horario->inicio}}"    
                         @endif
                       @endforeach>
                   </div>
-                  <div class="col-auto mx-2">
+                  <div class="mx-2">
                     às
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="sextaFim" placeholder="Término"
-                    @foreach ($professor->horarios as $horario)
+                  <div>
+                    <input type="text" class="time form-control" name="sextaFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Sexta")
-                          value="{{$horario->inicio}}"    
+                          value="{{$horario->fim}}"    
                         @endif
                       @endforeach>
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="row g-1 align-items-center mb-3">
-                  <div class="col-auto">
+              <div class="col-md-4 px-0 pe-2 horarioProf">
+                <div class="d-flex align-items-center mb-3">
+                  <div class="col-md-auto">
                     <label class="form-control-label">Sábado:</label>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="sabadoInicio" placeholder="Início"
-                    @foreach ($professor->horarios as $horario)
+                  <div class="ms-2">
+                    <input type="text" class="time form-control" name="sabadoInicio" placeholder="Início" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Sábado")
                           value="{{$horario->inicio}}"    
                         @endif
                       @endforeach>
                   </div>
-                  <div class="col-auto mx-2">
+                  <div class="mx-2">
                     às
                   </div>
-                  <div class="col-auto">
-                    <input type="text" class="time form-control" name="sabadoFim" placeholder="Término"
-                    @foreach ($professor->horarios as $horario)
+                  <div>
+                    <input type="text" class="time form-control" name="sabadoFim" placeholder="Término" 
+                      @foreach ($professor->horarios as $horario)
                         @if ($horario->dia == "Sábado")
-                          value="{{$horario->inicio}}"    
+                          value="{{$horario->fim}}"    
                         @endif
                       @endforeach>
                   </div>

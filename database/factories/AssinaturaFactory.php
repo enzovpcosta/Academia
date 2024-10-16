@@ -21,7 +21,7 @@ class AssinaturaFactory extends Factory
             'ativo' => true,
             'obtencao' => date('Y-m-d'),
             'vencimento' => date('Y-m-d', strtotime('+1 month', strtotime(date('Y-m-d')))),
-            'user_id' => '17',
+            'user_id' => '20',
         ];
     }
 }

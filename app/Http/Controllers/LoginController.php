@@ -75,7 +75,7 @@ class LoginController extends Controller
             'message' => 'Sua nova senha é: '.$newPassword
         ]));
 
-        return to_route('login');
+        return to_route('login')->with('novaSenha', 'Sua nova senha foi enviada por e-mail!');
     }
 
     public function destroy(){

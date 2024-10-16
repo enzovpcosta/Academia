@@ -5,6 +5,7 @@
     <form method="POST" action="/login">
         @csrf
         <x-input-error :messages="$errors->get('error')" class="mt-2" />
+        <x-input-success :messages="$errors->get('novaSenha')" class="mt-2" />
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

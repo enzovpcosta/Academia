@@ -338,7 +338,7 @@
                   </td>
                   <td class="text-center">
                     <a class="btn btn-link text-success text-gradient mb-0" href="/professores/treinos/{{$professor->id}}">Treinos</a>
-                    <a class="btn btn-link mb-0" href="/professores/editar/{{$professor->id}}">Editar</a>
+                    <a class="btn btn-link mb-0 px-0" href="/professores/editar/{{$professor->id}}">Editar</a>
                     <form id="{{$professor->id}}" class="d-inline" action="/professores/deletar/{{$professor->id}}" method="POST">
                       @csrf
                       @method('DELETE')

@@ -9,46 +9,30 @@
 {{-- @foreach ($treinos as $treino)
   @dd($treino->professor, $treino->user)  
 @endforeach --}}
-
-@if (count($treinos) == 0)
 <div class="container-fluid py-4">
   <div class="row">
     <div class="col-12">
       <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
-          @can('admin')
-          <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
-          <div class="text-end">
-            <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
-          </div>
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 mx-1" id="header-treinosAlunos-responsive">
+          <div class="d-flex flex-column justify-content-between mb-2">
+            @can('admin')
+            <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
           @elsecan('professor')
-          <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
-          <div class="text-end">
-            <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
-          </div>
+            <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
           @elsecan('aluno')
-              <h6>Meus Treinos:</h6>
-              <div class="text-end">
-                <a class="btn btn-outline-dark btn-sm m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
-              </div>
+            <h6>Meus Treinos:</h6>
           @endcan
+          </div>
+          <div class="d-flex flex-column gap-2">
+            <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
+            <a class="btn btn-outline-dark m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+          </div>
         </div>
-        <div class="card-body px-0 pt-0 pb-2">
-          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-@else
-<div class="container-fluid py-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="card mb-4">
-        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
+        <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2 mx-1" id="header-treinosAlunos">
           @can('admin')
           <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
           <div class="text-end">
+            <a class="btn bg-gradient-info shadow-info m-0" href="/treinos/cadastrar">Cadastrar treinos</a>
             <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
           @elsecan('professor')
@@ -64,12 +48,15 @@
           @endcan
         </div>
         <div class="card-body px-0 pt-0 pb-2">
+          @if (count($treinos) == 0)
+            <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado</p>
+          @else
           <div class="accordion accordion-flush" id="accordionTreinosAlunos">
             @foreach ($treinos as $treino)
             <div class="accordion-item">
               <h2 class="accordion-header">
-                <button class="accordion-button collapsed border-top border-bottom text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
-                  {{$treino->id}}- {{$treino->nome}}
+                <button class="accordion-button collapsed border-top text-dark fw-bold fs-6" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$treino->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
+                  {{$treino->nome}}
                 </button>
               </h2>
               <div id="flush-collapse{{$treino->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionTreinosAlunos">
@@ -126,7 +113,7 @@
                     @endcan
                     <a class="btn btn-link text-success text-gradient mb-0" target="_blank" href="/treinos/download/{{$treino->id}}">Baixar</a>
                     @can('admin')
-                    <a class="btn btn-link mb-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
+                    <a class="btn btn-link mb-0 px-0" href="/treinos/editar/{{$treino->id}}">Editar</a>
                     <form id="{{$treino->id}}" class="d-inline" action="/treinos/deletar/{{$treino->id}}" method="POST">
                       @csrf
                       @method('PUT')
@@ -146,6 +133,7 @@
               </tbody>
             </table>
           </div>
+          @endif
         </div>
       </div>
     </div>
@@ -175,7 +163,6 @@
         </div>
       </div>
     </div> 
-@endif
 <script>
   $('.registrar').click(function (e) { 
     e.preventDefault();

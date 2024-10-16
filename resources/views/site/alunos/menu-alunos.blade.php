@@ -78,10 +78,6 @@
                     <input type="text" class="form-control" readonly value="{{$aluno->assinatura->plano}}">
                   </div>
                   <div class="mb-2">
-                    <label class="form-label">Data de aquisição</label>
-                    <input type="email" class="tel form-control" readonly value="{{date('d/m/Y', strtotime($aluno->assinatura->obtencao))}}">
-                  </div>
-                  <div class="mb-2">
                     <label class="form-label">Data de vencimento</label>
                     <input type="text" class="tel form-control" readonly value="{{date('d/m/Y', strtotime($aluno->assinatura->vencimento))}}">
                   </div>
@@ -97,12 +93,13 @@
                     <label class="form-label">Ações</label>
                     <div class="d-flex">
                       <a class="btn btn-link text-success text-gradient mb-0 ps-1" href="/alunos/treinos/{{$aluno->id}}">Treinos</a>
-                    <a class="btn btn-link mb-0" href="/alunos/editar/{{$aluno->id}}">Editar</a>
-                    <form id="{{$aluno->id}}" class="d-inline" action="/alunos/deletar/{{$aluno->id}}" method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$aluno->id}}">Excluir</button>
-                    </form>
+                      <a class="btn btn-link text-info text-gradient mb-0 ps-0" href="/alunos/historico/{{$aluno->id}}">Histórico</a>
+                      <a class="btn btn-link mb-0 px-0" href="/alunos/editar/{{$aluno->id}}">Editar</a>
+                      <form id="{{$aluno->id}}" class="d-inline" action="/alunos/deletar/{{$aluno->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$aluno->id}}">Excluir</button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -118,7 +115,6 @@
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Cpf</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Telefone</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plano</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data de aquisição</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Data de vencimento</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ações</th>
@@ -152,9 +148,6 @@
                     <p class="text-dark text-gradient mb-0 font-weight-bold">{{$aluno->assinatura->plano}}</p>
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{date('d/m/Y', strtotime($aluno->assinatura->obtencao))}}</span>
-                  </td>
-                  <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{date('d/m/Y', strtotime($aluno->assinatura->vencimento))}}</span>
                     </td>
                     <td class="align-middle text-center text-sm">
@@ -165,12 +158,13 @@
                         @endif
                     </td>
                   <td class="align-middle text-center">
-                    <a class="btn btn-link text-success text-gradient mb-0" href="/alunos/treinos/{{$aluno->id}}">Treinos</a>
-                    <a class="btn btn-link mb-0" href="/alunos/editar/{{$aluno->id}}">Editar</a>
+                    <a class="btn btn-link text-success text-gradient mb-0 ps-0" href="/alunos/treinos/{{$aluno->id}}">Treinos</a>
+                    <a class="btn btn-link text-info text-gradient mb-0 ps-0" href="/alunos/historico/{{$aluno->id}}">Histórico</a>
+                    <a class="btn btn-link mb-0 px-0" href="/alunos/editar/{{$aluno->id}}">Editar</a>
                     <form id="{{$aluno->id}}" class="d-inline" action="/alunos/deletar/{{$aluno->id}}" method="POST">
                       @csrf
                       @method('DELETE')
-                      <button class="excluir btn btn-link text-danger text-gradient mb-0" value="{{$aluno->id}}">Excluir</button>
+                      <button class="excluir btn btn-link text-danger text-gradient mb-0 pe-0" value="{{$aluno->id}}">Excluir</button>
                     </form>
                   </td>
                 </tr>
