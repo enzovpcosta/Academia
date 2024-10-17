@@ -10,7 +10,7 @@
 <div class="container-fluid py-4">
   <div class="row">
     @if (auth()->check())
-        <h3 class="mb-5 text-light">Bem-vindo, {{auth()->user()->nome}}!</h3>
+        <h3 class="mb-5 text-light fw-bold">Bem-vindo, {{auth()->user()->nome}}!</h3>
     @endif
     @can('admin')
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">

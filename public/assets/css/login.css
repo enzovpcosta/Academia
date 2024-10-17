@@ -1,0 +1,185 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: linear-gradient(90deg, #4E9B95, #ACCDCA);
+    font-family: 'Figtree';
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+}
+
+.imagem-fae{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imagem-fae h2{
+    color: white;
+}
+
+.login, .loginReset{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    justify-content: space-evenly;
+}
+
+.login{
+    height: 35%;
+}
+
+.loginReset{
+    height: 20%;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0px 40px 0px;
+}
+
+.form-group label{
+    color: black;
+    font-size: 20px;
+}
+
+.form-group input{
+    border: 1px solid #4E9B95;
+    font-size: 18px;
+    height: 25px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    caret-color: #4E9B95;
+}
+.form-group input:focus{
+    outline: none;
+}
+.form-submit, .form-submit-Reset{
+    padding: 0px 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-submit{
+    gap: 10px;
+}
+
+.form-submit-Reset{
+    gap: 50px;
+}
+
+.form-submit a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #4E9B95;
+}
+
+.form-submit span{
+    color: #4E9B95;
+    font-weight: bold;
+}
+
+.form-submit button, .form-submit-Reset #btnSubmitReset{
+    padding: 10px 10px;
+    background-color: #4E9B95;
+    color: white;
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.form-submit button{
+    width: 30%;
+}
+
+.form-submit-Reset button{
+    width: 30%;
+}
+
+.form-submit-Reset #btnVoltar{
+    padding: 10px 10px;
+    border: 1px solid #4E9B95;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#voltar{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    gap: 10px;
+    color: #4E9B95;
+    text-decoration: none;
+}
+
+.form-submit button:hover, .form-submit-Reset #btnSubmitReset:hover{
+    background-color: #3e706c;
+    transition: .25s;
+}
+
+#btnVoltar:hover{
+    background-color: rgb(235, 235, 235);
+    transition: 0.25s;
+}
+
+.error{
+    color: red;
+}
+
+#novaSenha{
+    color: #4E9B95;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    background-color: #e1f3f2;
+    padding: 5px 0px;
+    border-radius: 10px;
+}
+
+@media (max-width: 1300px) {
+    .login, .loginReset{
+        width: 50%;
+    }
+}
+
+@media (max-width: 900px) {
+    .login{
+        width: 80%;
+        height: 45%;
+    }
+
+    .loginReset{
+        width: 80%;
+        height: 30%;
+    }
+
+    .form-submit a{
+        font-size: 14px;
+    }
+
+    .form-submit button{
+        font-size: 16px;
+    }
+
+    .form-submit-Reset button{
+        width: 43%;
+    }
+}

@@ -32,11 +32,11 @@ class LoginController extends Controller
     //    dd($user);
     
         if(!$user){
-        return back()->withErrors(['error' => 'Email ou senha inválida!']);
+        return back()->with('error','Email ou senha inválida!');
         }
         
        if(!Hash::check($request->password, $user->password)){
-        return back()->withErrors(['error' => 'Email ou senha inválida!']);
+        return back()->with('error','Email ou senha inválida!');
        }
        
        if($user->hasPermission($user->tipo) == false){
@@ -60,7 +60,7 @@ class LoginController extends Controller
         $user = User::where('email', $request->email)->first();
         
         if(!$user){
-            return back()->withErrors(['error' => 'Email inválido!']);
+            return back()->with('error', 'Email inválido!');
         }
         
         $newPassword = substr(md5(time()), 0, 6);

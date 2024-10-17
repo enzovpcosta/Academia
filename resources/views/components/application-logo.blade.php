@@ -1,1 +1,1 @@
-<img width="250px" src="{{asset('assets/img/logo-white.png')}}">
+<img width="300px" src="{{asset('assets/img/unifae.png')}}">

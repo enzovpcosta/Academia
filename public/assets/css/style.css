@@ -1,8 +1,5 @@
 #img-header{
-    background-image: url("../img/ironberg.jpg");
-    background-position: center;
-    background-size: cover;
-    filter: brightness(30%) blur(1px);
+    background-image: linear-gradient(to right, #4E9B95, #89c4c4);
 }
 
 input::-webkit-outer-spin-button,

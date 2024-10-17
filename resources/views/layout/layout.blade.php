@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/logo.png">
   <title>
     @yield('title')
   </title>
@@ -23,7 +21,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-  <link rel="shortcut icon" href="{{asset('assets/img/logo-white.png')}}" type="image/x-icon">
+  <link rel="shortcut icon" href="{{asset('assets/img/unifae-logo-verde.png')}}" type="image/x-icon">
     <script src="{{asset('assets/js/core/popper.min.js')}}" ></script>
     <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script>
     <script src="{{asset('assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
@@ -53,11 +51,9 @@
 <body class="g-sidenav-show   bg-gray-100">
   <div id="img-header" class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="aside">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+    <div class="sidenav-header d-flex align-items-center justify-content-center">
       <a class="navbar-brand m-0" href="/">
-        <img src="{{asset('assets/img/logo-white.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold">Costa Titanium</span>
+        <img src="{{asset('assets/img/unifae-logo-verde.png')}}" class="navbar-brand-img h-100" alt="main_logo">
       </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -192,7 +188,7 @@
   <main class="main-content position-relative border-radius-lg ">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-      <div class="container-fluid py-1 px-3">
+      <div class="container-fluid py-1 px-0">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Página</a></li>
