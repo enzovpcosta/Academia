@@ -55,7 +55,6 @@ class ProfessorController extends Controller
             'email' => 'required|email',
             'senha' => 'required|min:4',
             'especialidade' => 'required',
-            'image' => 'required'
         ], [
             'name.required' => 'Este campo é obrigatório',
             'cpf.required' => 'Este campo é obrigatório',
@@ -69,7 +68,6 @@ class ProfessorController extends Controller
             'senha.required' => 'Este campo é obrigatório',
             'senha.min' => 'A senha deve ter no mínimo :min caracteres',
             'especialidade.required' => 'Este campo é obrigatório',
-            'image.required' => 'Este campo é obrigatório',
         ]);
 
         if(count(User::where('cpf', preg_replace('/[^A-Za-z0-9]/', '', $request->cpf))->get()) > 0){
@@ -214,7 +212,6 @@ class ProfessorController extends Controller
             'email' => 'required|email',
             'senha' => 'required|min:4',
             'especialidade' => 'required',
-            'image' => 'required'
         ], [
             'name.required' => 'Este campo é obrigatório',
             'cpf.required' => 'Este campo é obrigatório',
@@ -228,7 +225,6 @@ class ProfessorController extends Controller
             'senha.required' => 'Este campo é obrigatório',
             'senha.min' => 'A senha deve ter no mínimo :min caracteres',
             'especialidade.required' => 'Este campo é obrigatório',
-            'image.required' => 'Este campo é obrigatório',
         ]);
 
         if(isset($request->segundaInicio) && isset($request->segundaFim)){

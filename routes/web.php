@@ -9,15 +9,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\TreinoController;
-use App\Models\Assinatura;
-use App\Models\Treino;
-use App\Models\User;
-use FontLib\Table\Type\name;
-
-// Route::get('/', function() {
-//     User::factory()->create();
-//     Assinatura::factory()->create();
-// });
+use Illuminate\Support\Facades\Hash;
 
 Route::middleware('guest')->group(function () {
     

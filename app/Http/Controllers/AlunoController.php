@@ -68,7 +68,6 @@ class AlunoController extends Controller
             'email' => 'required|email',
             'senha' => 'required|min:4',
             'plano' => 'required',
-            'image' => 'required'
         ], [
             'name.required' => 'Este campo é obrigatório',
             'cpf.required' => 'Este campo é obrigatório',
@@ -82,7 +81,6 @@ class AlunoController extends Controller
             'senha.required' => 'Este campo é obrigatório',
             'senha.min' => 'A senha deve ter no mínimo :min caracteres',
             'plano.required' => 'Este campo é obrigatório',
-            'image.required' => 'Este campo é obrigatório',
         ]);
 
         if(count(User::where('cpf', preg_replace('/[^A-Za-z0-9]/', '', $request->cpf))->get()) > 0){
@@ -169,7 +167,6 @@ class AlunoController extends Controller
             'contato' => 'required|size:15',
             'email' => 'required|email',
             'senha' => 'required|min:4',
-            'image' => 'required'
         ], [
             'name.required' => 'Este campo é obrigatório',
             'cpf.required' => 'Este campo é obrigatório',
@@ -182,7 +179,6 @@ class AlunoController extends Controller
             'email.email' => 'Digite um email válido',
             'senha.required' => 'Este campo é obrigatório',
             'senha.min' => 'A senha deve ter no mínimo :min caracteres',
-            'image.required' => 'Este campo é obrigatório',
         ]);
 
         if(auth()->user()->hasPermission('admin') || auth()->user()->hasPermission('professor')){
