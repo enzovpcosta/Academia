@@ -117,26 +117,10 @@
               <div id="adicionarExercicioResponsive" class="col-md-auto text-center mb-3">
                 <button class="adicionarExercicio btn btn-outline-success btn-sm m-0 py-1 px-2">Adicionar novo exercício <i class="bi bi-plus-lg"></i></button>
               </div>
-
-              <div class="col-md-6">
+              <div class="col-md-12">
                 <div class="form-group">
-                  <label class="form-control-label">Nome do professor</label>
-                  @can('admin')
-                  <select class="professor form-select" id="professor" name="professor" required>
-                    <option value=""></option>
-                    @foreach ($professores as $professor)
-                        <option value="{{$professor->id}}">{{$professor->nome}}</option>
-                    @endforeach
-                  </select>
-                  @elsecan('professor')
-                  <input type="text" class="form-control" id="professor" name="professor" value="{{auth()->user()->id}}" readonly>
-                  @endcan
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="form-control-label">Dias da semana</label>
-                  <input class="form-control" type="text" name="dias" placeholder="Dias em que o treino será realizado" required>
+                  <label class="form-control-label">Dias da semana em que o treino será realizado</label>
+                  <input class="form-control" type="text" name="dias" placeholder="Digite os dias em que o treino será realizado" required>
                 </div>
               </div>
               <div class="col-md-12 mt-3">

@@ -63,7 +63,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="bi bi-house text-primary text-sm opacity-10"></i>
+              <i class="bi bi-house-fill text-secondary text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Menu Principal</span>
           </a>
@@ -71,7 +71,7 @@
         <li class="nav-item my-1 disabled">
           <a href="#dropdownA" class="nav-link" data-bs-toggle="collapse" aria-current="page">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="bi bi-person text-dark text-sm opacity-10"></i>
+              <i class="bi bi-person-fill text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Alunos</span>
           </a>
@@ -101,11 +101,27 @@
             </li>
           </ul>
         </li>
+        <li class="nav-item my-1 disabled">
+          <a href="#dropdownAdmin" class="nav-link" data-bs-toggle="collapse" aria-current="page">
+            <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="bi bi-person-fill-gear text-primary text-sm opacity-10"></i>
+            </div>
+            <span class="nav-link-text ms-1">Administradores</span>
+          </a>
+          <ul class="nav collapse ms-5 flex-column" id="dropdownAdmin" data-bs-parent="#sidenav-main">
+            <li class="nav-item">
+              <a class="nav-link text-xs" href="/administradores">Ver administradores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-xs" href="/administradores/cadastrar">Cadastrar administrador</a>
+            </li>
+          </ul>
+        </li>
         @endcan
         <li class="nav-item my-1 disabled">
           <a href="#dropdownT" class="nav-link" data-bs-toggle="collapse" aria-current="page">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="bi bi-lightning-charge text-warning text-sm opacity-10"></i>
+              <i class="bi bi-lightning-charge-fill text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Treinos</span>
           </a>
@@ -152,7 +168,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="bi bi-house text-primary text-sm opacity-10"></i>
+              <i class="bi bi-house-fill text-secondary text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Menu Principal</span>
           </a>
@@ -160,7 +176,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/alunos/treinos/{{auth()->user()->id}}">
             <div class="icon icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="bi bi-lightning-charge text-warning text-sm opacity-10"></i>
+              <i class="bi bi-lightning-charge-fill text-warning text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Meus Treinos</span>
           </a>

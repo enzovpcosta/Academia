@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunoController;
@@ -70,5 +71,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/treinos/update/{id}', [TreinoController::class, 'update']);
     Route::put('/treinos/deletar/{id}', [TreinoController::class, 'destroy']);
     Route::get('/treinos/download/{id}', [PdfController::class, 'pdf']);
-
+    
+    Route::get('/administradores', [AdminController::class, 'index']);
+    Route::get('/administradores/cadastrar', [AdminController::class, 'create']);
+    Route::post('/administradores/cadastrar', [AdminController::class, 'store']);
+    Route::get('/administradores/editar/{id}', [AdminController::class, 'edit']);
+    Route::put('/administradores/update/{id}', [AdminController::class, 'update']);
+    Route::delete('/administradores/deletar/{id}', [AdminController::class, 'destroy']);
 });
+

@@ -61,15 +61,15 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-uppercase font-weight-bold">Total de treinos</p>
+                <p class="text-sm mb-0 text-uppercase font-weight-bold">Total de administradores</p>
                 <h5 class="font-weight-bolder">
-                  {{count($treinos)}}
+                  {{count($admins)}}
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
-              <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                <i class="bi bi-lightning-charge-fill text-lg text-sm opacity-10"></i>
+              <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                <i class="bi bi-person-fill-gear text-lg text-sm opacity-10"></i>
               </div>
             </div>
           </div>

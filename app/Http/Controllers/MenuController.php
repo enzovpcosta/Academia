@@ -28,8 +28,9 @@ class MenuController extends Controller
         $alunos = User::where('tipo', 'aluno')->get();
         $professores = User::where('tipo', 'professor')->get();
         $exercicios = Exercicio::all();
+        $admins = User::where('tipo', 'admin')->get();
         
-        return view('site.dashboard', ['alunos' => $alunos, 'professores' => $professores, 'exercicios' => $exercicios, 'treinos' => $treinos, 'plano' => $plano]);
+        return view('site.dashboard', ['alunos' => $alunos, 'professores' => $professores, 'exercicios' => $exercicios, 'treinos' => $treinos, 'plano' => $plano, 'admins' => $admins]);
 
     }
 }

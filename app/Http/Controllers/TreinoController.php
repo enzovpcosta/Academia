@@ -65,11 +65,10 @@ class TreinoController extends Controller
    public function create(){
    
       $alunos = User::where('tipo', 'aluno')->orderBy('nome', 'asc')->get();
-      $professores = User::where('tipo', 'professor')->orderBy('nome', 'asc')->get();
       $exercicios = Exercicio::orderBy('nome', 'asc')->get();
       $musculos = Exercicio::distinct()->orderBy('musculo', 'asc')->get(['musculo']);
 
-      return view('site.treinos.cadastro-treino', ['alunos' => $alunos, 'professores' => $professores, 'exercicios' => $exercicios, 'musculos' => $musculos]);
+      return view('site.treinos.cadastro-treino', ['alunos' => $alunos, 'exercicios' => $exercicios, 'musculos' => $musculos]);
 
    }
 
@@ -81,7 +80,7 @@ class TreinoController extends Controller
       $treino->nome = $request->name;
       $treino->dias = $request->dias;
       $treino->user_id = $request->aluno;
-      $treino->professor_id = $request->professor;
+      $treino->professor_id = auth()->user()->id;
       $treino->ativo = true;
 
       // dd($request->exercicio);

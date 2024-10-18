@@ -20,7 +20,7 @@
           @elsecan('professor')
             <h6>Treinos: <span class="text-secondary">{{$aluno->nome}}</span></h6>
           @elsecan('aluno')
-            <h6>Meus Treinos:</h6>
+            <h6>Meus Treinos</h6>
           @endcan
           </div>
           <div class="d-flex flex-column gap-2">
@@ -41,7 +41,7 @@
             <a class="btn btn-outline-dark btn-sm m-0" href="/alunos"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
           @elsecan('aluno')
-          <h6>Meus Treinos:</h6>
+          <h6>Meus Treinos</h6>
           <div class="text-end">
             <a class="btn btn-outline-dark btn-sm m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>

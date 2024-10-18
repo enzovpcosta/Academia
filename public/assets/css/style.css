@@ -180,6 +180,8 @@ input::-webkit-inner-spin-button {
   display: none;
 }
 
+#accordionAdmins,
+#header-admins-responsive,
 #accordionHistoricoAlunos,
 #header-treinosAlunos-responsive,
 #horarioProfResponsive,
@@ -214,10 +216,11 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-width: 650px){
-  #header-alunos,  #tabela-exercicios{
+
+  #header-admins, #header-alunos,  #tabela-exercicios{
     display: none !important;
   }
-  #header-alunos-responsive, #accordionExercicios{
+  #header-admins-responsive, #header-alunos-responsive, #accordionExercicios{
     display: block !important;
   }
 }
@@ -233,10 +236,16 @@ input::-webkit-inner-spin-button {
 }
 
 @media (max-width: 760px){
-  #header-professores, #tabela-treinos-professores{
+  
+  #tabela-admins,
+  #header-professores,
+  #tabela-treinos-professores{
     display: none !important;
   }
-  #header-professores-responsive, #accordionTreinosProfessores{
+
+  #accordionAdmins,
+  #header-professores-responsive, 
+  #accordionTreinosProfessores{
     display: block !important;
   }
 }
