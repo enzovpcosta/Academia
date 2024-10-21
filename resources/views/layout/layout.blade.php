@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
   <link rel="shortcut icon" href="{{asset('assets/img/unifae-logo-verde.png')}}" type="image/x-icon">
     <script src="{{asset('assets/js/core/popper.min.js')}}" ></script>
-    <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script>
+    {{-- <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script> --}}
     <script src="{{asset('assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
   <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
