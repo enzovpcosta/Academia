@@ -14,7 +14,7 @@ class PdfController extends Controller
         $exercicios = TreinoExercicio::where('treino_id', $id)->with('exercicios')->get();
         // dd($exercicios);
         $pdf = Pdf::loadView('site.pdf',['treino' => $treino, 'exercicios' => $exercicios]);
-        return $pdf->stream('treino.pdf');
+        return $pdf->stream('treino-'.$treino->nome.'.pdf');
 
     }
 }

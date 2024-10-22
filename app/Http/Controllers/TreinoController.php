@@ -34,6 +34,7 @@ class TreinoController extends Controller
       //   dd($treinos);
      } else {
 
+     $aluno = '';
      $treinos = 'menu';
      
  }
