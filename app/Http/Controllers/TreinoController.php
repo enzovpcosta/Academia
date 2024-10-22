@@ -28,6 +28,7 @@ class TreinoController extends Controller
                   'ativo' => true
                ])->paginate(10);
             } else {
+               $aluno = false;
                $treinos = [];
             }
       //   dd($treinos);
@@ -36,7 +37,7 @@ class TreinoController extends Controller
      $treinos = 'menu';
      
  }
-      return view('site.treinos.menu-treinos', ['treinos' => $treinos, 'search' => $search]);
+      return view('site.treinos.menu-treinos', ['treinos' => $treinos, 'search' => $search, 'aluno' => $aluno]);
    }
 
    public function todos(){

@@ -39,8 +39,10 @@
         <div class="card-body px-0 pt-0 pb-2">
           @if ($treinos == 'menu')
           <p class="text-sm mb-0 text-uppercase font-weight-bold px-4 mb-2">Digite o CPF do aluno no campo de pesquisa para ver seus treinos!</p>
+          @elseif($aluno == false)
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum aluno cadastrado com o CPF: {{$search}}</p>
           @elseif($treinos != 'menu' && count($treinos) == 0)
-          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado para o cpf: {{$search}}</p>
+          <p class="text-sm mb-0 text-uppercase font-weight-bold ps-4 mb-2">Não há nenhum treino registrado para o CPF: {{$search}}</p>
           @else
           <div class="accordion accordion-flush" id="accordionTreinos">
             @foreach ($treinos as $treino)
