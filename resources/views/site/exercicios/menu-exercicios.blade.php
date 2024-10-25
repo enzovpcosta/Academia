@@ -120,7 +120,7 @@
                 @foreach ($exercicios as $exercicio)
                 <tr>
                   <td>
-                    <h6 class="mb-0 text-sm px-2 py-1">{{$exercicio->nome}}</h6>
+                    <h6 class="mb-0 text-sm ps-3 py-1">{{$exercicio->nome}}</h6>
                   </td>
                   <td>
                     <h6 class="text-sm">{{$exercicio->musculo}}</h6>
