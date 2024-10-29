@@ -24,7 +24,7 @@
   <link rel="shortcut icon" href="{{asset('assets/img/unifae-logo-verde.png')}}" type="image/x-icon">
     <script src="{{asset('assets/js/core/popper.min.js')}}" ></script>
     {{-- <script src="{{asset('assets/js/core/bootstrap.min.js')}}" ></script> --}}
-    <script src="{{asset('assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
+    {{-- <script src="{{asset('assets/js/argon-dashboard.min.js?v=2.0.4')}}"></script> --}}
   <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
@@ -52,6 +52,7 @@
   <div id="img-header" class="min-height-300 position-absolute w-100"></div>
   <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="aside">
     <div class="sidenav-header d-flex align-items-center justify-content-center">
+      <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="/">
         <img src="{{asset('assets/img/unifae-logo-verde.png')}}" class="navbar-brand-img h-100" alt="main_logo">
       </a>
@@ -200,34 +201,37 @@
         @endcan
       </ul>
     </div>
+    <div class="sidenav-footer mx-3">
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" class="btn btn-outline-danger shadow-danger btn-sm w-100 m-0"><i class="bi bi-box-arrow-left pe-2"></i>Sair</button>
+      </form>
+    </div>
   </aside>
+  <!-- Navbar -->
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
-      <div class="container-fluid py-1 px-0">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Página</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('title')</li>
-          </ol>
-          <h6 class="font-weight-bolder text-white mb-0">@yield('title')</h6>
-        </nav>
-        {{-- <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <form action="/logout" method="POST">
-                @csrf
-                <button type="submit" class="btn bg-gradient-danger shadow-danger btn-sm w-100 m-0">Sair</button>
-              </form>
+  <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+    <div class="container-fluid py-1 px-0">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+          <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Página</a></li>
+          <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('title')</li>
+        </ol>
+        <h6 class="font-weight-bolder text-white mb-0">@yield('title')</h6>
+      </nav>
+      <ul class="navbar-nav justify-content-end gap-3">
+        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+          <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner" id="navBarIcon">
+              <i class="sidenav-toggler-line bg-white"></i>
+              <i class="sidenav-toggler-line bg-white"></i>
+              <i class="sidenav-toggler-line bg-white"></i>
             </div>
-          </div>
-        </div> --}}
-        <form action="/logout" method="POST">
-          @csrf
-          <button type="submit" class="btn bg-gradient-danger shadow-danger btn-sm w-100 m-0">Sair</button>
-        </form>
-      </div>
-    </nav>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
     @if (session('msg'))
         <script>
           Swal.fire({
@@ -244,6 +248,30 @@
     $('.telefone').mask('(00) 00000-0000');
     $('.cpf').mask('000.000.000-00', {reverse: true});
     $('.time').mask('00:00');
+
+    let x = 0
+
+    $('#navBarIcon').click(function (e) { 
+      e.preventDefault();
+
+      if(x==0){
+        $('.sidenav').css('transform', 'translateX(0)');
+        $('main, #img-header').css('filter', 'brightness(70%)');
+        x=1
+      } else {
+        $('.sidenav').css('transform', 'translateX(-17.125rem)');
+        $('main, #img-header').css('filter', 'brightness(100%)');
+        x=0
+      }
+      
+    });
+
+    $('#iconSidenav').click(function (e) { 
+      e.preventDefault();
+      $('.sidenav').css('transform', 'translateX(-17.125rem)');
+        $('main, #img-header').css('filter', 'brightness(100%)');
+        x=0
+    });
 
     var a
 
@@ -265,95 +293,6 @@
       const aside = document.getElementById('aside')
       aside.style.right = '3000px'
     });
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-new Chart(ctx1, {
-  type: "line",
-  data: {
-    labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-    datasets: [{
-      label: "Mobile apps",
-      tension: 0.4,
-      borderWidth: 0,
-      pointRadius: 0,
-      borderColor: "#5e72e4",
-      backgroundColor: gradientStroke1,
-      borderWidth: 3,
-      fill: true,
-      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-      maxBarThickness: 6
-
-    }],
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false,
-      }
-    },
-    interaction: {
-      intersect: false,
-      mode: 'index',
-    },
-    scales: {
-      y: {
-        grid: {
-          drawBorder: false,
-          display: true,
-          drawOnChartArea: true,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          padding: 10,
-          color: '#fbfbfb',
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-      x: {
-        grid: {
-          drawBorder: false,
-          display: false,
-          drawOnChartArea: false,
-          drawTicks: false,
-          borderDash: [5, 5]
-        },
-        ticks: {
-          display: true,
-          color: '#ccc',
-          padding: 20,
-          font: {
-            size: 11,
-            family: "Open Sans",
-            style: 'normal',
-            lineHeight: 2
-          },
-        }
-      },
-    },
-  },
-
-});
-var win = navigator.platform.indexOf('Win') > -1;
-if (win && document.querySelector('#sidenav-scrollbar')) {
-  var options = {
-    damping: '0.5'
-  }
-  Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-}
   </script>
   </body>
   </html>

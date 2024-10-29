@@ -13,14 +13,13 @@
         <h3 class="mb-5 text-light fw-bold">Bem-vindo, {{auth()->user()->nome}}!</h3>
     @endif
     @can('admin')
-    <div class="d-flex justify-content-between">
-      <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card h-100">
           <a href="/alunos" class="card-body p-3">
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Nº de Alunos</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Alunos</p>
                   <h5 class="font-weight-bolder">
                     {{count($alunos)}}
                   </h5>
@@ -35,13 +34,13 @@
           </a>
         </div>
       </div>
-      <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card h-100">
           <a href="/professores" class="card-body p-3">
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Nº de Professores</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Professores</p>
                   <h5 class="font-weight-bolder">
                     {{count($professores)}}
                   </h5>
@@ -56,13 +55,13 @@
           </a>
         </div>
       </div>
-      <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card h-100">
           <a href="/treinos" class="card-body p-3">
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Nº de administradores</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Administradores</p>
                   <h5 class="font-weight-bolder">
                     {{count($admins)}}
                   </h5>
@@ -77,34 +76,13 @@
           </a>
         </div>
       </div>
-      <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+      <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <div class="card h-100">
           <a href="/exercicios" class="card-body p-3">
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Nº de treinos</p>
-                  <h5 class="font-weight-bolder">
-                    {{count($treinos)}}
-                  </h5>
-                </div>
-              </div>
-              <div class="col-4 d-flex justify-content-end">
-                <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                  <i class="bi bi-lightning-charge-fill opacity-10"></i>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100">
-          <a href="/exercicios" class="card-body p-3">
-            <div class="row">
-              <div class="col-8">
-                <div class="numbers">
-                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Nº de exercicios</p>
+                  <p class="text-sm mb-0 text-uppercase font-weight-bold">Exercicios</p>
                   <h5 class="font-weight-bolder">
                     {{count($exercicios)}}
                   </h5>
@@ -119,7 +97,6 @@
           </a>
         </div>
       </div>
-    </div>
     @elsecan('professor')
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
       <div class="card h-100">
@@ -281,6 +258,31 @@
       </div>
     </div>  
     @endcan
-    
   </div>
+  <div class="row">
+    <div class="col-md-6 my-4">
+      <h1>Usuários</h1>
+      <canvas id="myChart"></canvas>
+    </div>  
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('myChart');
+
+    const alunos = Number("{{count($alunos)}}")
+    const professores = Number("{{count($professores)}}")
+    const adms = Number("{{count($admins)}}")
+
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Alunos', 'Professores', 'Aministradores'],
+        datasets: [{
+          label: 'Total',
+          data: [alunos, professores, adms],
+        }]
+      },
+    });
+  </script>
 @endsection
