@@ -59,7 +59,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="email" class="form-control-label">Email</label>
-                  <input class="form-control" type="email" name="email" placeholder="Digite o email" value="{{old('email')}}" autofocus="false">
+                  <input class="form-control" type="email" name="email" placeholder="Digite o email" value="{{old('email')}}">
                   @error('email')
                       <span class="text-danger">{{$message}}</span>
                   @enderror

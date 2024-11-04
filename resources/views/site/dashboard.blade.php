@@ -259,30 +259,4 @@
     </div>  
     @endcan
   </div>
-  <div class="row">
-    <div class="col-md-6 my-4">
-      <h1>Usuários</h1>
-      <canvas id="myChart"></canvas>
-    </div>  
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('myChart');
-
-    const alunos = Number("{{count($alunos)}}")
-    const professores = Number("{{count($professores)}}")
-    const adms = Number("{{count($admins)}}")
-
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Alunos', 'Professores', 'Aministradores'],
-        datasets: [{
-          label: 'Total',
-          data: [alunos, professores, adms],
-        }]
-      },
-    });
-  </script>
 @endsection

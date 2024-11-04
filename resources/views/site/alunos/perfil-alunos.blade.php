@@ -18,7 +18,7 @@
             {{$aluno->nome}}
           </h5>
           <div class="text-end">
-            <a class="btn btn-outline-dark btn-sm m-0" href="/"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+            <a class="btn btn-outline-dark m-0" href="#" onclick="javascript:window.history.back(-1);return false;"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
       </div>

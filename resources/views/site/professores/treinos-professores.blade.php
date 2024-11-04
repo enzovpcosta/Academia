@@ -18,7 +18,7 @@
         <div class="card-header pb-0 d-flex justify-content-between align-items-center my-2">
           <h5>Treinos criados por: <span class="text-secondary">{{$professor->nome}}</span></h5>
           <div class="text-end">
-            <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+            <a class="btn btn-outline-dark m-0" href="#" onclick="javascript:window.history.back(-1);return false;"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
           </div>
         </div>
         <div class="card-body px-0 pt-0 pb-2">

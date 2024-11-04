@@ -18,10 +18,7 @@
             @endcan
             <div class="d-flex align-items-center justify-content-between">
               <p class="mb-0">Dados Pessoais</p>
-              @can('admin')
-                <a class="btn btn-outline-dark btn-sm m-0" href="/professores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
-              @elsecan('professor')
-              <a class="btn btn-outline-dark btn-sm m-0" href="/professores/perfil/{{auth()->user()->id}}"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+              <a class="btn btn-outline-dark m-0" href="#" onclick="javascript:window.history.back(-1);return false;"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
               @endcan
             </div>
           </div>

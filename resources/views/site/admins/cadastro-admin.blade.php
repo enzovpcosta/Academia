@@ -12,7 +12,7 @@
           <div class="card-header pb-0">
             <div class="d-flex justify-content-between align-items-center">
               <p class="mb-0">Dados Pessoais</p>
-              <a class="btn btn-outline-dark btn-sm m-0" href="/administradores"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
+              <a class="btn btn-outline-dark m-0" href="#" onclick="javascript:window.history.back(-1);return false;"><i class="bi bi-arrow-left me-3 fw-bold"></i>Voltar</a>
             </div>
           </div>
           <div class="card-body">
